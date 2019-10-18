@@ -10,7 +10,7 @@ from kivy.uix.button import Button
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.config import Config
 
-from TextFileManipulation import UserPassCheck
+from TextFileManipulation import UserPassCheck, databaseIsFull, addUser, passwordConfirm
 
 #prevents the window from being resized and screwing up the float layout
 Config.set('graphics','resizable', False)
@@ -21,79 +21,115 @@ class LoginScreen(FloatLayout):
     def __init__(self,**kwargs):
 
         super(LoginScreen,self).__init__(**kwargs)
+        self.loginFlag=True
+        
         self.size=[300,300]
         self.title=Label(text='Welcome to the Pace Maker DCM',font_size=30,size_hint=[.5,.05],pos=[200,500])
         self.add_widget(self.title)
+
         self.usernameLabel=Label(text='Username',font_size=20,size_hint=[.25,.05],pos=[150,400])
         self.add_widget(self.usernameLabel)
 
         self.usernameInput=TextInput(multiline=False,size_hint=[.30,.05],pos=[450,400])
         self.add_widget(self.usernameInput)
 
-        self.passwordLabel=Label(text='Password',font_size=20,size_hint=[.25,.05],pos=[150,300])
+        self.passwordLabel=Label(text='Password',font_size=20,size_hint=[.25,.05],pos=[150,350])
         self.add_widget(self.passwordLabel)
 
-        self.passwordInput=TextInput(multiline=False,password=True,size_hint=[.30,.05],pos=[450,300])
+        self.passwordInput=TextInput(multiline=False,password=True,size_hint=[.30,.05],pos=[450,350])
         self.add_widget(self.passwordInput)
 
-        self.submitButton=Button(text='Submit',size_hint=[.10,.05],pos=[350,200])
-        self.submitButton.bind(on_press=self.pressed)
-        self.add_widget(self.submitButton)
-
-        self.newUserButton=Button(text='Register A New User',size_hint=[.2,.05],pos=[310,100])
-        self.newUserButton.bind(on_press=self.newUserPress)
-        self.add_widget(self.newUserButton)
-
-    def pressed(self, instance):
-        username=self.usernameInput.text
-        password=self.passwordInput.text
-
-        print("Match: " + UserPassCheck(username,password))
-        self.usernameInput.text=""
-        self.passwordInput.text=""
-        runtimeApp.screen_manager.current='New'
-        
-    def newUserPress(self,instance):
-        runtimeApp.screen_manager.current='NewUser'
-
-
-#screen style and functionality to register a new user
-class NewUser(FloatLayout):
-
-    def __init__(self,**kwargs):
-
-        super(NewUser,self).__init__(**kwargs)
-        self.size=[300,300]
-        self.title=Label(text='Register a new user',font_size=30,size_hint=[.5,.05],pos=[200,500])
-        self.add_widget(self.title)
-
-        self.usernameLabel=Label(text='Username',font_size=20,size_hint=[.25,.05],pos=[150,400])
-        self.add_widget(self.usernameLabel)
-        
-        self.usernameInput=TextInput(multiline=False,size_hint=[.30,.05],pos=[450,400])
-        self.add_widget(self.usernameInput)
-
-        self.passwordLabel=Label(text='Password',font_size=20,size_hint=[.25,.05],pos=[150,300])
-        self.add_widget(self.passwordLabel)
-
-        self.passwordInput=TextInput(multiline=False,password=True,size_hint=[.30,.05],pos=[450,300])
-        self.add_widget(self.passwordInput)
-
-        self.passconfirmLabel=Label(text='Confirm Password',font_size=20,size_hint=[.25,.05],pos=[150,200])
+        self.passconfirmLabel=Label(text='Confirm Password',font_size=20,size_hint=[.25,.05],pos=[150,300],color=[1,1,1,0])
         self.add_widget(self.passconfirmLabel)
 
-        self.passconfirmInput=TextInput(multiline=False,password=True,size_hint=[.30,.05],pos=[450,200])
+        self.passconfirmInput=TextInput(multiline=False,password=True,size_hint=[.30,.05],pos=[450,300],readonly=True,background_color=[1,1,1,0],cursor_color=[1,0,0,0])
         self.add_widget(self.passconfirmInput)
 
-        self.submitButton=Button(text='Submit',size_hint=[.10,.05],pos=[350,100])
-        self.submitButton.bind(on_press=self.pressed)
+        self.wrongPassword=Label(text='Username and Password do not match existing users',size_hint=[.4,.05],pos=[250,250],color=[1,1,1,0])
+        self.add_widget(self.wrongPassword)
+
+        self.maxNumUsers=Label(text='Maximum number of Users have been registered',size_hint=[.4,.05],pos=[250,250],color=[1,1,1,0])
+        self.add_widget(self.maxNumUsers)
+
+        self.noMatchPassword=Label(text='The password does not match',size_hint=[.4,.05],pos=[250,250],color=[1,1,1,0])
+        self.add_widget(self.noMatchPassword)
+
+        self.submitButton=Button(text='Login',size_hint=[.10,.05],pos=[350,200])
+        self.submitButton.bind(on_press=self.submitPress)
         self.add_widget(self.submitButton)
 
-    def pressed(self,instance):
-        print("Button has been pressed")
-        runtimeApp.screen_manager.current='Login'
+        self.switchLayoutButton=Button(text='Register A New User',size_hint=[.2,.05],pos=[310,150])
+        self.switchLayoutButton.bind(on_press=self.switchLayoutPress)
+        self.add_widget(self.switchLayoutButton)
 
+        
 
+    def submitPress(self, instance):
+        username=self.usernameInput.text
+        password=self.passwordInput.text
+        passconfirm=self.passconfirmInput.text
+
+        if self.loginFlag==True:
+            #logic to check username and password are correct
+            if UserPassCheck(username,password):
+                self.wrongPassword.color=[1,1,1,0]
+                runtimeApp.screen_manager.current='New'
+            else:
+                self.wrongPassword.color=[1,1,1,1]
+            
+        else:
+            #logic to add new user to file
+            if databaseIsFull():
+                self.maxNumUsers.color=[1,1,1,1]
+            elif passwordConfirm(password,passconfirm)==False:
+                self.noMatchPassword.color=[1,1,1,1]
+            else:
+                addUser(username,password)
+                
+            
+        self.usernameInput.text=""
+        self.passwordInput.text=""
+        self.passconfirmInput.text=""
+        
+    def switchLayoutPress(self,instance):
+
+        if self.loginFlag==True:
+            #switching from login to register mode
+            self.wrongPassword.color=[1,1,1,0]
+
+            self.passconfirmLabel.color=[1,1,1,1]
+
+            self.passconfirmInput.background_color=[1,1,1,1]
+            self.passconfirmInput.cursor_color=[1,0,0,1]
+            self.passconfirmInput.readonly=False
+            self.passconfirmInput.text=""
+
+            self.usernameLabel.text='New Username'
+            self.passwordLabel.text='New Password'
+            
+            self.submitButton.text='Register'
+            self.switchLayoutButton.text='Login Existing User'
+
+            self.loginFlag=False
+        else:
+            #switching from register to login mode
+            self.maxNumUsers.color=[1,1,1,0]
+            self.noMatchPassword.color=[1,1,1,0]
+            
+            self.passconfirmLabel.color=[1,1,1,0]
+
+            self.passconfirmInput.background_color=[1,1,1,0]
+            self.passconfirmInput.cursor_color=[1,0,0,0]
+            self.passconfirmInput.readonly=True
+
+            self.usernameLabel.text='Username'
+            self.passwordLabel.text='Password'
+
+            
+            self.submitButton.text='Login'
+            self.switchLayoutButton.text='Register a new user'
+
+            self.loginFlag=True
 
 class NewScreen(GridLayout):
 
@@ -113,7 +149,6 @@ class NewScreen(GridLayout):
     def press(self, instance):
         runtimeApp.screen_manager.current='Login'
         
-
 class MyApp(App):
 
     def build(self):
@@ -128,11 +163,6 @@ class MyApp(App):
         #add the screen to the manager
         self.screen_manager.add_widget(screen)
 
-        self.NewUserScreen=NewUser()
-        screen=Screen(name='NewUser')
-        screen.add_widget(self.NewUserScreen)
-        self.screen_manager.add_widget(screen)
-        
         self.New_screen=NewScreen()
         screen=Screen(name='New')
         screen.add_widget(self.New_screen)
@@ -143,5 +173,3 @@ class MyApp(App):
 if __name__=='__main__':
     runtimeApp=MyApp()
     runtimeApp.run()
-
-#change
