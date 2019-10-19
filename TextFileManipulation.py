@@ -1,5 +1,8 @@
 '''
-manipulation of text file as database
+python file manipulation tests
+
+input username and password and compare
+to text file
 '''
 
 #checking if entered username and password are in file
@@ -18,7 +21,7 @@ def UserPassCheck(username, password):
             if line[:-1]==password:
                 #login info matches records
                 accountsFile.close()
-                return True
+                return "True"
                 
         
         if line[:-1]==username: 
@@ -29,7 +32,7 @@ def UserPassCheck(username, password):
 
     accountsFile.close()
 
-    return False
+    return "False"
 
         
 
