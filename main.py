@@ -3,12 +3,19 @@ kivy.require('1.11.1')
 
 ### KIVY 
 from kivy.app import App
+
 from kivy.uix.gridlayout import GridLayout
+from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.button import Button
+from kivy.uix.checkbox import CheckBox
+from kivy.uix.tabbedpanel import TabbedPanel
 from kivy.uix.screenmanager import ScreenManager, Screen
+
+from kivy.properties import StringProperty
+from kivy.lang import Builder
 from kivy.config import Config
 
 ### FUNCTIONALITY
@@ -145,17 +152,61 @@ class PacingModes(FloatLayout):
     def AOOscreen(self, instance):
                     runtimeApp.screen_manager.current='ParametersAOO'
 
-class ParametersAOO(FloatLayout):
-    def __init__(self,**kwargs):
-        super(ParametersAOO,self).__init__(**kwargs)
-        self.size=[300,300]
-        self.title=Label(text='AOO Parameters',font_size=25,size_hint=[.5,.05],pos=[200,500])
-        self.add_widget(self.title)
 
-        
+#screen for displaying and modifying AOO parameters
+AOOParameters = ['Lower Rate Limit', 'Upper Rate Limit', 'Atrial Amplitude', 'Atrial Pulse Width'] #extend for all by adding all parameters and have a different list for each pacing mode
+Builder.load_string("""
 
+<ParametersAOO>:
+    do_default_tab: False
 
-        
+    TabbedPanelItem:
+        text: 'Parameters'
+
+        Table:
+            padding: 50, 50, 50, 50
+            orientation: 'vertical'
+
+<Row>:
+    spacing: 50
+    #orientation: 'vertical'
+    size_hint_x: 1
+    size_hint_y: 0.7
+    txt: txtinpt.text
+
+    Label:
+        text: root.txt
+        size_hint_x: 0.5
+
+    TextInput:
+        id: txtinpt
+        text: root.txt
+        disabled: not CheckBox.active
+        size_hint_x: 1.5
+
+    CheckBox:
+        id:CheckBox 
+        text: 'CheckBox'
+        active: False
+    Button:
+        text: 'Send'       
+
+""")  
+
+class Table(BoxLayout):
+    def __init__(self, **kwargs):
+        super(Table, self).__init__(**kwargs)
+        for element in AOOParameters:
+            self.add_widget(Row(element))
+
+class Row(BoxLayout):
+    txt = StringProperty()
+    def __init__(self, row, **kwargs):
+        super(Row, self).__init__(**kwargs)
+        self.txt = row
+
+class ParametersAOO(TabbedPanel):
+    pass
 
 
 class NewScreen(GridLayout):
