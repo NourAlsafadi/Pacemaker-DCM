@@ -105,12 +105,13 @@ class PacingModes(FloatLayout):
         self.add_widget(self.title)
 
         #### BUTTONS
-
+        
         #AOO#
         self.AOO_mode=Button(text='AOO',size_hint=[.25,.25],pos=[515,250])
-            #self.AOO_mode.bind(on_press=self.pressed)
+        self.AOO_mode.bind(on_press=self.AOOscreen)
         self.add_widget(self.AOO_mode)
-
+        
+        
         
         #VOO#
         self.VOO_mode=Button(text='VOO',size_hint=[.25,.25],pos=[315,100])
@@ -131,22 +132,29 @@ class PacingModes(FloatLayout):
 
 
         #OTHER MODE#
-        self.other_mode=Button(text=' ',size_hint=[.25,.25],pos=[115,250])
+        self.other_mode=Button(text='OOO',size_hint=[.25,.25],pos=[115,250])
             #self.AAI_mode.bind(on_press=self.pressed)
         self.add_widget(self.other_mode)
 
 
         #OTHER MODE#
-        self.other_mode1=Button(text=' ',size_hint=[.25,.25],pos=[115,100])
+        self.other_mode1=Button(text='OOO',size_hint=[.25,.25],pos=[115,100])
             #self.VVI_mode.bind(on_press=self.pressed)
         self.add_widget(self.other_mode1)
-        
+
+    def AOOscreen(self, instance):
+                    runtimeApp.screen_manager.current='ParametersAOO'
+
 class ParametersAOO(FloatLayout):
     def __init__(self,**kwargs):
-        super(PacingModes,self).__init__(**kwargs)
+        super(ParametersAOO,self).__init__(**kwargs)
         self.size=[300,300]
-        self.title=Label(text='Pacing Modes',font_size=30,size_hint=[.5,.05],pos=[200,500])
+        self.title=Label(text='AOO Parameters',font_size=25,size_hint=[.5,.05],pos=[200,500])
         self.add_widget(self.title)
+
+        
+
+
         
 
 
@@ -155,7 +163,7 @@ class NewScreen(GridLayout):
     def __init__(self, **kwargs):
 
         super(NewScreen,self).__init__(**kwargs)
-        self.rows=2
+        self.rows=3
 
         self.label1=Label(text='Hello World')
         self.add_widget(self.label1)
@@ -163,10 +171,17 @@ class NewScreen(GridLayout):
         self.button1=Button(text='Click me to switch back')
         self.button1.bind(on_press=self.press)
         self.add_widget(self.button1)
+
+        self.button2=Button(text='Pacing Modes')
+        self.button2.bind(on_press=self.pressP)
+        self.add_widget(self.button2)
         
 
     def press(self, instance):
         runtimeApp.screen_manager.current='Login'
+
+    def pressP(self, instance):
+        runtimeApp.screen_manager.current='PacingModes'
         
 
 class PacemakerApp(App):
@@ -197,6 +212,12 @@ class PacemakerApp(App):
         self.PacingModes_screen=PacingModes()
         screen=Screen(name='PacingModes')
         screen.add_widget(self.PacingModes_screen)
+        self.screen_manager.add_widget(screen)
+
+        ######## AOO PARAMETERS
+        self.ParametersAOO_screen=ParametersAOO()
+        screen=Screen(name='ParametersAOO')
+        screen.add_widget(self.ParametersAOO_screen)
         self.screen_manager.add_widget(screen)
         
         return self.screen_manager
