@@ -93,7 +93,7 @@ class NewUser(FloatLayout):
 
     def pressed(self,instance):
         print("Button has been pressed")
-        runtimeApp.screen_manager.current='PacingModes' ########## CHANGE THIS back to 'Login'
+        runtimeApp.screen_manager.current='Login'
 
 #screen for choosing pacing modes
 class PacingModes(FloatLayout):
@@ -137,11 +137,16 @@ class PacingModes(FloatLayout):
 
 
         #OTHER MODE#
-        self.OTHER_mode=Button(text=' ',size_hint=[.25,.25],pos=[115,100])
+        self.other_mode1=Button(text=' ',size_hint=[.25,.25],pos=[115,100])
             #self.VVI_mode.bind(on_press=self.pressed)
-        self.add_widget(self.OTHER_mode)
+        self.add_widget(self.other_mode1)
         
-        
+class ParametersAOO(FloatLayout):
+    def __init__(self,**kwargs):
+        super(PacingModes,self).__init__(**kwargs)
+        self.size=[300,300]
+        self.title=Label(text='Pacing Modes',font_size=30,size_hint=[.5,.05],pos=[200,500])
+        self.add_widget(self.title)
         
 
 
