@@ -1,6 +1,7 @@
 import kivy
 kivy.require('1.11.1')
 
+### KIVY 
 from kivy.app import App
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
@@ -10,12 +11,13 @@ from kivy.uix.button import Button
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.config import Config
 
+### FUNCTIONALITY
 from TextFileManipulation import UserPassCheck
 
 #prevents the window from being resized and screwing up the float layout
 Config.set('graphics','resizable', False)
 
-#Login screen stlye and button functionality
+#Login screen style and button functionality
 class LoginScreen(FloatLayout):
 
     def __init__(self,**kwargs):
@@ -91,8 +93,56 @@ class NewUser(FloatLayout):
 
     def pressed(self,instance):
         print("Button has been pressed")
-        runtimeApp.screen_manager.current='Login'
+        runtimeApp.screen_manager.current='PacingModes' ########## CHANGE THIS back to 'Login'
 
+#screen for choosing pacing modes
+class PacingModes(FloatLayout):
+   
+    def __init__(self,**kwargs):
+        super(PacingModes,self).__init__(**kwargs)
+        self.size=[300,300]
+        self.title=Label(text='Pacing Modes',font_size=30,size_hint=[.5,.05],pos=[200,500])
+        self.add_widget(self.title)
+
+        #### BUTTONS
+
+        #AOO#
+        self.AOO_mode=Button(text='AOO',size_hint=[.25,.25],pos=[515,250])
+            #self.AOO_mode.bind(on_press=self.pressed)
+        self.add_widget(self.AOO_mode)
+
+        
+        #VOO#
+        self.VOO_mode=Button(text='VOO',size_hint=[.25,.25],pos=[315,100])
+            #self.VOO_mode.bind(on_press=self.pressed)
+        self.add_widget(self.VOO_mode)
+        
+
+        #AAI#
+        self.AAI_mode=Button(text='AAI',size_hint=[.25,.25],pos=[315,250])
+            #self.AAI_mode.bind(on_press=self.pressed)
+        self.add_widget(self.AAI_mode)
+
+
+        #VVI#
+        self.VVI_mode=Button(text='VVI',size_hint=[.25,.25],pos=[515,100])
+            #self.VVI_mode.bind(on_press=self.pressed)
+        self.add_widget(self.VVI_mode)
+
+
+        #OTHER MODE#
+        self.other_mode=Button(text=' ',size_hint=[.25,.25],pos=[115,250])
+            #self.AAI_mode.bind(on_press=self.pressed)
+        self.add_widget(self.other_mode)
+
+
+        #OTHER MODE#
+        self.OTHER_mode=Button(text=' ',size_hint=[.25,.25],pos=[115,100])
+            #self.VVI_mode.bind(on_press=self.pressed)
+        self.add_widget(self.OTHER_mode)
+        
+        
+        
 
 
 class NewScreen(GridLayout):
@@ -114,7 +164,7 @@ class NewScreen(GridLayout):
         runtimeApp.screen_manager.current='Login'
         
 
-class MyApp(App):
+class PacemakerApp(App):
 
     def build(self):
         self.screen_manager=ScreenManager()
@@ -137,11 +187,17 @@ class MyApp(App):
         screen=Screen(name='New')
         screen.add_widget(self.New_screen)
         self.screen_manager.add_widget(screen)
+
+        ######## PACING MODES
+        self.PacingModes_screen=PacingModes()
+        screen=Screen(name='PacingModes')
+        screen.add_widget(self.PacingModes_screen)
+        self.screen_manager.add_widget(screen)
         
         return self.screen_manager
 
 if __name__=='__main__':
-    runtimeApp=MyApp()
+    runtimeApp=PacemakerApp()
     runtimeApp.run()
 
-#change test
+#change
