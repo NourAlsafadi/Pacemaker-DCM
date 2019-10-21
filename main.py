@@ -155,43 +155,6 @@ class PacingModes(FloatLayout):
 
 #screen for displaying and modifying AOO parameters
 AOOParameters = ['Lower Rate Limit', 'Upper Rate Limit', 'Atrial Amplitude', 'Atrial Pulse Width'] #extend for all by adding all parameters and have a different list for each pacing mode
-Builder.load_string("""
-
-<ParametersAOO>:
-    do_default_tab: False
-
-    TabbedPanelItem:
-        text: 'Parameters'
-
-        Table:
-            padding: 50, 50, 50, 50
-            orientation: 'vertical'
-
-<Row>:
-    spacing: 50
-    #orientation: 'vertical'
-    size_hint_x: 1
-    size_hint_y: 0.7
-    txt: txtinpt.text
-
-    Label:
-        text: root.txt
-        size_hint_x: 0.5
-
-    TextInput:
-        id: txtinpt
-        text: root.txt
-        disabled: not CheckBox.active
-        size_hint_x: 1.5
-
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-    Button:
-        text: 'Send'       
-
-""")  
 
 class Table(BoxLayout):
     def __init__(self, **kwargs):
@@ -272,6 +235,43 @@ class PacemakerApp(App):
         self.screen_manager.add_widget(screen)
         
         return self.screen_manager
+
+Builder.load_string("""
+
+<ParametersAOO>:
+    do_default_tab: False
+
+    TabbedPanelItem:
+        text: 'Parameters'
+
+        Table:
+            padding: 50, 50, 50, 50
+            orientation: 'vertical'
+
+<Row>:
+    spacing: 50
+    #orientation: 'vertical'
+    size_hint_x: 1
+    txt: txtinpt.text
+
+    Label:
+        text: root.txt
+        size_hint_x: 0.5
+
+    TextInput:
+        id: txtinpt
+        text: root.txt
+        disabled: not CheckBox.active
+        size_hint_x: 1.5
+
+    CheckBox:
+        id:CheckBox 
+        text: 'CheckBox'
+        active: False
+    Button:
+        text: 'Send'       
+
+""")  
 
 if __name__=='__main__':
     runtimeApp=PacemakerApp()
