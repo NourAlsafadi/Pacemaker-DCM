@@ -4,7 +4,6 @@
 
     TabbedPanelItem:
         text: 'AOO'
-        id: one
 
         TableAOO:
             padding: 50, 50, 50, 50
@@ -12,7 +11,6 @@
     
     TabbedPanelItem:
         text: 'VOO'
-        id: two
 
         TableVOO:
             padding: 50, 50, 50, 50
@@ -20,7 +18,6 @@
 
     TabbedPanelItem:
         text: 'AAI'
-        id: three
 
         TableAAI:
             padding: 50, 50, 50, 50
@@ -28,7 +25,6 @@
 
     TabbedPanelItem:
         text: 'VVI'
-        id: four
 
         TableVVI:
             padding: 50, 50, 50, 50
@@ -38,14 +34,12 @@
 <RowAOO>:
     spacing: 50
     size_hint_x: 1
-    txt: txtinpt.text
 
     Label:
         text: root.txt
         size_hint_x: 1
 
-    TextInput:
-        id: txtinpt
+    TextInput:        
         text: root.txt
         disabled: not CheckBox.active
         size_hint_x: 1.5
@@ -61,14 +55,12 @@
 <RowVOO>:
     spacing: 50
     size_hint_x: 1
-    txt: txtinpt.text
 
     Label:
         text: root.txt
         size_hint_x: 1
 
     TextInput:
-        id: txtinpt
         text: root.txt
         disabled: not CheckBox.active
         size_hint_x: 1.5
@@ -84,14 +76,12 @@
 <RowAAI>:
     spacing: 50
     size_hint_x: 1
-    txt: txtinpt.text
 
     Label:
         text: root.txt
         size_hint_x: 1
 
     TextInput:
-        id: txtinpt
         text: root.txt
         disabled: not CheckBox.active
         size_hint_x: 1.5
@@ -107,14 +97,12 @@
 <RowVVI>:
     spacing: 50
     size_hint_x: 1
-    txt: txtinpt.text
 
     Label:
         text: root.txt
         size_hint_x: 1
 
     TextInput:
-        id: txtinpt
         text: root.txt
         disabled: not CheckBox.active
         size_hint_x: 1.5
