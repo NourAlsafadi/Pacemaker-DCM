@@ -275,7 +275,7 @@ class Parameters(TabbedPanel):
     def __init__(self, **kwargs):
         super(Parameters, self).__init__(**kwargs)
 
-    def getTab(index):
+    def getTab(self,index):
         return TabbedPanel.tab_list
         
 
