@@ -149,8 +149,11 @@ class PacingModes(FloatLayout):
         runtimeApp.screen_manager.current='ParametersVVI'
 
 
-#screen for displaying and modifying AOO parameters
+# pacing mode parameters
 AOOParameters = ['Lower Rate Limit', 'Upper Rate Limit', 'Atrial Amplitude', 'Atrial Pulse Width'] 
+VOOParameters = ['Lower Rate Limit', 'Upper Rate Limit', 'Ventricular Amplitude', 'Ventricular Pulse Width'] 
+AAIParameters = ['Lower Rate Limit', 'Upper Rate Limit', 'Atrial Amplitude', 'Atrial Pulse Width', 'Atrial Sensitivity','ARP','PVARP','Hysteresis','Rate Smoothing'] 
+VVIParameters = ['Lower Rate Limit', 'Upper Rate Limit', 'Ventricular Amplitude', 'Ventricular Pulse Width','Ventricular Sensitivity','VRP','Hysteresis','Rate Smoothing'] 
 
 class Table(BoxLayout):
     def __init__(self, **kwargs):
@@ -164,6 +167,7 @@ class Row(BoxLayout):
         super(Row, self).__init__(**kwargs)
         self.txt = row
 
+#screens for displaying and modifying pacing mode parameters
 class ParametersAOO(TabbedPanel):
     pass
 
