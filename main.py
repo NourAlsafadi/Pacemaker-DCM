@@ -1,9 +1,7 @@
 import kivy
 kivy.require('1.11.1')
 
- 
 from kivy.app import App
-
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
@@ -13,16 +11,14 @@ from kivy.uix.button import Button
 from kivy.uix.checkbox import CheckBox
 from kivy.uix.tabbedpanel import TabbedPanel
 from kivy.uix.screenmanager import ScreenManager, Screen
-
 from kivy.properties import StringProperty
 from kivy.lang import Builder
 from kivy.config import Config
-
-### KV FILE
-Builder.load_file('main.kv')
-
-### FUNCTIONALITY
 from TextFileManipulation import UserPassCheck
+
+
+#loads kv file
+Builder.load_file('main.kv')
 
 #prevents the window from being resized and screwing up the float layout
 Config.set('graphics','resizable', False)
@@ -67,7 +63,6 @@ class LoginScreen(FloatLayout):
         
     def newUserPress(self,instance):
         runtimeApp.screen_manager.current='NewUser'
-
 
 #screen style and functionality to register a new user
 class NewUser(FloatLayout):
@@ -118,35 +113,36 @@ class PacingModes(FloatLayout):
         
         #AOO#
         self.AOO_mode=Button(text='AOO',size_hint=[.25,.25],pos=[515,250])
-        self.AOO_mode.bind(on_press=self.AOOscreen)
+        self.AOO_mode.bind(on_press= self.AOOscreen)
         self.add_widget(self.AOO_mode)
         
         #VOO#
         self.VOO_mode=Button(text='VOO',size_hint=[.25,.25],pos=[315,100])
-            #self.VOO_mode.bind(on_press=self.pressed)
+        self.VOO_mode.bind(on_press=self.VOOscreen)
         self.add_widget(self.VOO_mode)
 
         #AAI#
         self.AAI_mode=Button(text='AAI',size_hint=[.25,.25],pos=[315,250])
             #self.AAI_mode.bind(on_press=self.pressed)
+        self.AAI_mode.bind(on_press=self.AAIscreen)
         self.add_widget(self.AAI_mode)
 
         #VVI#
         self.VVI_mode=Button(text='VVI',size_hint=[.25,.25],pos=[515,100])
-            #self.VVI_mode.bind(on_press=self.pressed)
+        self.VVI_mode.bind(on_press=self.VVIscreen)
         self.add_widget(self.VVI_mode)
 
     def AOOscreen(self, instance):
-        runtimeApp.screen_manager.current='ParametersAOO'
+        runtimeApp.screen_manager.current= 'Parameters'
 
     def VOOscreen(self, instance):
-        runtimeApp.screen_manager.current='ParametersVOO'
+        runtimeApp.screen_manager.current='Parameters'
 
     def AAIscreen(self, instance):
-        runtimeApp.screen_manager.current='ParametersAAI'
+        runtimeApp.screen_manager.current='Parameters'
 
     def VVIscreen(self, instance):
-        runtimeApp.screen_manager.current='ParametersVVI'
+        runtimeApp.screen_manager.current= 'Parameters'
 
 
 # pacing mode parameters
@@ -155,21 +151,58 @@ VOOParameters = ['Lower Rate Limit', 'Upper Rate Limit', 'Ventricular Amplitude'
 AAIParameters = ['Lower Rate Limit', 'Upper Rate Limit', 'Atrial Amplitude', 'Atrial Pulse Width', 'Atrial Sensitivity','ARP','PVARP','Hysteresis','Rate Smoothing'] 
 VVIParameters = ['Lower Rate Limit', 'Upper Rate Limit', 'Ventricular Amplitude', 'Ventricular Pulse Width','Ventricular Sensitivity','VRP','Hysteresis','Rate Smoothing'] 
 
-class Table(BoxLayout):
+class TableAOO(BoxLayout):
     def __init__(self, **kwargs):
-        super(Table, self).__init__(**kwargs)
+        super(TableAOO, self).__init__(**kwargs)
         for element in AOOParameters:
-            self.add_widget(Row(element))
-
-class Row(BoxLayout):
+            self.add_widget(RowAOO(element))
+class RowAOO(BoxLayout):
     txt = StringProperty()
     def __init__(self, row, **kwargs):
-        super(Row, self).__init__(**kwargs)
+        super(RowAOO, self).__init__(**kwargs)
         self.txt = row
 
-#screens for displaying and modifying pacing mode parameters
-class ParametersAOO(TabbedPanel):
-    pass
+class TableVOO(BoxLayout):
+    def __init__(self, **kwargs):
+        super(TableVOO, self).__init__(**kwargs)
+        for element in VOOParameters:
+            self.add_widget(RowVOO(element))
+class RowVOO(BoxLayout):
+    txt = StringProperty()
+    def __init__(self, row, **kwargs):
+        super(RowVOO, self).__init__(**kwargs)
+        self.txt = row
+
+class TableAAI(BoxLayout):
+    def __init__(self, **kwargs):
+        super(TableAAI, self).__init__(**kwargs)
+        for element in AAIParameters:
+            self.add_widget(RowAAI(element))
+class RowAAI(BoxLayout):
+    txt = StringProperty()
+    def __init__(self, row, **kwargs):
+        super(RowAAI, self).__init__(**kwargs)
+        self.txt = row
+
+class TableVVI(BoxLayout):
+    def __init__(self, **kwargs):
+        super(TableVVI, self).__init__(**kwargs)
+        for element in VVIParameters:
+            self.add_widget(RowVVI(element))
+class RowVVI(BoxLayout):
+    txt = StringProperty()
+    def __init__(self, row, **kwargs):
+        super(RowVVI, self).__init__(**kwargs)
+        self.txt = row
+
+#screen for displaying and modifying pacing mode parameters
+class Parameters(TabbedPanel):
+    def __init__(self, **kwargs):
+        super(Parameters, self).__init__(**kwargs)
+
+    def getTab(index):
+        return TabbedPanel.tab_list
+        
 
 class NewScreen(GridLayout):
 
@@ -226,12 +259,13 @@ class PacemakerApp(App):
         screen.add_widget(self.PacingModes_screen)
         self.screen_manager.add_widget(screen)
 
-        ######## AOO PARAMETERS
-        self.ParametersAOO_screen=ParametersAOO()
-        screen=Screen(name='ParametersAOO')
-        screen.add_widget(self.ParametersAOO_screen)
+        ######## PARAMETERS
+        self.Parameters_screen=Parameters()
+        screen=Screen(name='Parameters')
+        screen.add_widget(self.Parameters_screen)
         self.screen_manager.add_widget(screen)
-        
+
+
         return self.screen_manager
 
 
