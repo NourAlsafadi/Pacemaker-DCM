@@ -1,7 +1,7 @@
 import kivy
 kivy.require('1.11.1')
 
-### KIVY 
+ 
 from kivy.app import App
 
 from kivy.uix.gridlayout import GridLayout
@@ -17,6 +17,9 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.properties import StringProperty
 from kivy.lang import Builder
 from kivy.config import Config
+
+### KV FILE
+Builder.load_file('main.kv')
 
 ### FUNCTIONALITY
 from TextFileManipulation import UserPassCheck
@@ -118,43 +121,36 @@ class PacingModes(FloatLayout):
         self.AOO_mode.bind(on_press=self.AOOscreen)
         self.add_widget(self.AOO_mode)
         
-        
-        
         #VOO#
         self.VOO_mode=Button(text='VOO',size_hint=[.25,.25],pos=[315,100])
             #self.VOO_mode.bind(on_press=self.pressed)
         self.add_widget(self.VOO_mode)
-        
 
         #AAI#
         self.AAI_mode=Button(text='AAI',size_hint=[.25,.25],pos=[315,250])
             #self.AAI_mode.bind(on_press=self.pressed)
         self.add_widget(self.AAI_mode)
 
-
         #VVI#
         self.VVI_mode=Button(text='VVI',size_hint=[.25,.25],pos=[515,100])
             #self.VVI_mode.bind(on_press=self.pressed)
         self.add_widget(self.VVI_mode)
 
-
-        #OTHER MODE#
-        self.other_mode=Button(text='OOO',size_hint=[.25,.25],pos=[115,250])
-            #self.AAI_mode.bind(on_press=self.pressed)
-        self.add_widget(self.other_mode)
-
-
-        #OTHER MODE#
-        self.other_mode1=Button(text='OOO',size_hint=[.25,.25],pos=[115,100])
-            #self.VVI_mode.bind(on_press=self.pressed)
-        self.add_widget(self.other_mode1)
-
     def AOOscreen(self, instance):
-                    runtimeApp.screen_manager.current='ParametersAOO'
+        runtimeApp.screen_manager.current='ParametersAOO'
+
+    def VOOscreen(self, instance):
+        runtimeApp.screen_manager.current='ParametersVOO'
+
+    def AAIscreen(self, instance):
+        runtimeApp.screen_manager.current='ParametersAAI'
+
+    def VVIscreen(self, instance):
+        runtimeApp.screen_manager.current='ParametersVVI'
 
 
 #screen for displaying and modifying AOO parameters
-AOOParameters = ['Lower Rate Limit', 'Upper Rate Limit', 'Atrial Amplitude', 'Atrial Pulse Width'] #extend for all by adding all parameters and have a different list for each pacing mode
+AOOParameters = ['Lower Rate Limit', 'Upper Rate Limit', 'Atrial Amplitude', 'Atrial Pulse Width'] 
 
 class Table(BoxLayout):
     def __init__(self, **kwargs):
@@ -170,7 +166,6 @@ class Row(BoxLayout):
 
 class ParametersAOO(TabbedPanel):
     pass
-
 
 class NewScreen(GridLayout):
 
@@ -197,7 +192,6 @@ class NewScreen(GridLayout):
     def pressP(self, instance):
         runtimeApp.screen_manager.current='PacingModes'
         
-
 class PacemakerApp(App):
 
     def build(self):
@@ -211,7 +205,7 @@ class PacemakerApp(App):
         screen.add_widget(self.Login_screen)
         #add the screen to the manager
         self.screen_manager.add_widget(screen)
-
+        
         self.NewUserScreen=NewUser()
         screen=Screen(name='NewUser')
         screen.add_widget(self.NewUserScreen)
@@ -236,45 +230,8 @@ class PacemakerApp(App):
         
         return self.screen_manager
 
-Builder.load_string("""
 
-<ParametersAOO>:
-    do_default_tab: False
-
-    TabbedPanelItem:
-        text: 'Parameters'
-
-        Table:
-            padding: 50, 50, 50, 50
-            orientation: 'vertical'
-
-<Row>:
-    spacing: 50
-    #orientation: 'vertical'
-    size_hint_x: 1
-    txt: txtinpt.text
-
-    Label:
-        text: root.txt
-        size_hint_x: 0.5
-
-    TextInput:
-        id: txtinpt
-        text: root.txt
-        disabled: not CheckBox.active
-        size_hint_x: 1.5
-
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-    Button:
-        text: 'Send'       
-
-""")  
 
 if __name__=='__main__':
     runtimeApp=PacemakerApp()
     runtimeApp.run()
-
-#change

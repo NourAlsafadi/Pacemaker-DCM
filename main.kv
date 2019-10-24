@@ -1,0 +1,34 @@
+# Filename: main.kv
+
+<ParametersAOO>:
+    do_default_tab: False
+
+    TabbedPanelItem:
+        text: 'Parameters'
+
+        Table:
+            padding: 50, 50, 50, 50
+            orientation: 'vertical'
+
+<Row>:
+    spacing: 50
+    #orientation: 'vertical'
+    size_hint_x: 1
+    txt: txtinpt.text
+
+    Label:
+        text: root.txt
+        size_hint_x: 0.5
+
+    TextInput:
+        id: txtinpt
+        text: root.txt
+        disabled: not CheckBox.active
+        size_hint_x: 1.5
+
+    CheckBox:
+        id:CheckBox 
+        text: 'CheckBox'
+        active: False
+    Button:
+        text: 'Send'  
