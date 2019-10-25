@@ -1,6 +1,5 @@
 '''
 python file manipulation tests
-
 input username and password and compare
 to text file
 '''
@@ -75,4 +74,3 @@ def FileRead():
 
     for line in fileLine:
         print(line)
-    

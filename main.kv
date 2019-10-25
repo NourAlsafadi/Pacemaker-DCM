@@ -1,0 +1,117 @@
+
+<Parameters>:
+    do_default_tab: False
+
+    TabbedPanelItem:
+        text: 'AOO'
+
+        TableAOO:
+            padding: 50, 50, 50, 50
+            orientation: 'vertical'
+    
+    TabbedPanelItem:
+        text: 'VOO'
+
+        TableVOO:
+            padding: 50, 50, 50, 50
+            orientation: 'vertical'
+
+    TabbedPanelItem:
+        text: 'AAI'
+
+        TableAAI:
+            padding: 50, 50, 50, 50
+            orientation: 'vertical'
+
+    TabbedPanelItem:
+        text: 'VVI'
+
+        TableVVI:
+            padding: 50, 50, 50, 50
+            orientation: 'vertical'
+
+
+<RowAOO>:
+    spacing: 50
+    size_hint_x: 1
+
+    Label:
+        text: root.txt
+        size_hint_x: 1
+
+    TextInput:        
+        text: root.txt
+        disabled: not CheckBox.active
+        size_hint_x: 1.5
+
+    CheckBox:
+        id:CheckBox 
+        text: 'CheckBox'
+        active: False
+        size_hint_x: 0.2
+    Button:
+        text: 'Send'  
+
+<RowVOO>:
+    spacing: 50
+    size_hint_x: 1
+
+    Label:
+        text: root.txt
+        size_hint_x: 1
+
+    TextInput:
+        text: root.txt
+        disabled: not CheckBox.active
+        size_hint_x: 1.5
+
+    CheckBox:
+        id:CheckBox 
+        text: 'CheckBox'
+        active: False
+        size_hint_x: 0.2
+    Button:
+        text: 'Send'  
+
+<RowAAI>:
+    spacing: 50
+    size_hint_x: 1
+
+    Label:
+        text: root.txt
+        size_hint_x: 1
+
+    TextInput:
+        text: root.txt
+        disabled: not CheckBox.active
+        size_hint_x: 1.5
+
+    CheckBox:
+        id:CheckBox 
+        text: 'CheckBox'
+        active: False
+        size_hint_x: 0.2
+    Button:
+        text: 'Send' 
+
+<RowVVI>:
+    spacing: 50
+    size_hint_x: 1
+
+    Label:
+        text: root.txt
+        size_hint_x: 1
+
+    TextInput:
+        text: root.txt
+        disabled: not CheckBox.active
+        size_hint_x: 1.5
+
+    CheckBox:
+        id:CheckBox 
+        text: 'CheckBox'
+        active: False
+        size_hint_x: 0.2
+    Button:
+        text: 'Send' 
+
