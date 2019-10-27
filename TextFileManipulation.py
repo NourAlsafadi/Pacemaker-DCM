@@ -6,8 +6,7 @@ to text file
 
 #checking if entered username and password are in file
 #used for login
-#returns true or false as string for debugging and testing
-#can be changed to boolean 
+#returns true or false
 def UserPassCheck(username, password):
 
     accountsFile=open("Accounts.txt","r")
@@ -16,24 +15,23 @@ def UserPassCheck(username, password):
     usernameFlag=False
     
     for line in fileLines:
-        if line[:-1]==username: 
-            usernameFlag=True
-        else:
-            usernameFlag=False
-        
         if usernameFlag==True:
             if line[:-1]==password:
                 #login info matches records
                 accountsFile.close()
-                return "True"
-                
+                return True
+
+        if line[:-1]==username: 
+            usernameFlag=True
+        else:
+            usernameFlag=False
         
         
 
 
     accountsFile.close()
 
-    return "False"
+    return False
 
         
 
@@ -63,7 +61,8 @@ def databaseIsFull():
 def addUser(username,password):
     accountsFile=open("Accounts.txt","a")#change to append? find out if append can create new file
 
-     
+    accountsFile.write(username+"\n")
+    accountsFile.write(password+"\n")
 
     accountsFile.close()
     
@@ -76,3 +75,5 @@ def FileRead():
 
     for line in fileLine:
         print(line)
+
+    print(len(fileLine))

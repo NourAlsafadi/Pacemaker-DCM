@@ -32,6 +32,8 @@
             padding: 50, 50, 50, 50
             orientation: 'vertical'
 
+		
+		
 
 <RowAOO>:
     spacing: 50
@@ -122,24 +124,40 @@
     orientation: 'vertical'
 
     Label:
-        text: 'Device Connection'
+        text: 'Connected Device: <Device Identifier here>'
         orientation: 'horizontal'
         
     Label:
         text: root.status()
         orientation: 'horizontal'
         color: root.color() 
-
+	
+	Button:
+        text: 'Pacing Modes'
+        opacity: 1 if root.showPacingModes() else 0
+        on_press: root.pacingModesScreen()
+		
     Button:
         text: root.disconnect()
         halign: 'center'
         # size_hint_y: 0.15
 
-    Button:
-        text: 'Pacing Modes'
-        opacity: 1 if root.showPacingModes() else 0
-        on_press: root.pacingModesScreen()
-    
+	Button:
+		text: 'Logout'
+		on_press: root.Logout()
+
+<statusBar>:
+	Label:
+		text:'Connected Device: <Device Identifier here>'
+		
+	Label:
+		text: 'Status: Connected'
+		color: (0,1,0.5,1)
+	
+	Button:
+		text: 'Return to Connection Screen'
+		background_color: (0.75,0,0,1)
+		on_press: root.returnConnection()
     
 
     
