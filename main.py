@@ -14,6 +14,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.properties import StringProperty
 from kivy.lang import Builder
 from kivy.config import Config
+
 from TextFileManipulation import UserPassCheck, databaseIsFull, addUser, passwordConfirm
 
 
@@ -81,7 +82,7 @@ class LoginScreen(FloatLayout):
             #logic to check username and password are correct
             if UserPassCheck(username,password):
                 self.wrongPassword.color=[1,1,1,0]
-                runtimeApp.screen_manager.current='New'
+                runtimeApp.screen_manager.current='Connection'
             else:
                 self.wrongPassword.color=[1,1,1,1]
             
@@ -174,6 +175,39 @@ class NewUser(FloatLayout):
     def pressed(self,instance):
         print("Button has been pressed")
         runtimeApp.screen_manager.current='Login'
+
+#screen for connecting with device
+class Connection(BoxLayout):
+    def __init__(self,**kwargs):
+        super(Connection,self).__init__(**kwargs)
+    
+    def status(self):
+        status = 'Connected'
+        return 'Status: ' + status
+    
+    def color(self):
+        if self.status() == 'Status: Connected':
+            return (0,1,0.5,1)
+        elif self.status() == 'Status: Disconnected':
+            return (1,0.25,0.25,1)
+        elif self.status() == 'Status: Device Unrecognized':
+            return (1,0.9,0.25,1)
+
+    def showPacingModes(self):
+        if self.status() == 'Status: Connected':
+            return True
+        else:
+            return False
+
+    def disconnect(self):
+        if self.status() == 'Status: Connected':
+            return 'Disconnect from Device'
+        else:
+            return 'Connect to Device'
+    
+    def pacingModesScreen(self):
+        runtimeApp.screen_manager.current='PacingModes'
+
 
 #screen for choosing pacing modes
 class PacingModes(FloatLayout):
@@ -275,10 +309,8 @@ class Parameters(TabbedPanel):
     def __init__(self, **kwargs):
         super(Parameters, self).__init__(**kwargs)
 
-    def getTab(self,index):
-        return TabbedPanel.tab_list
-        
-
+    def getTab(self):
+        return self.get_tab_list(self)
 class NewScreen(GridLayout):
 
     def __init__(self, **kwargs):
@@ -326,6 +358,12 @@ class PacemakerApp(App):
         self.New_screen=NewScreen()
         screen=Screen(name='New')
         screen.add_widget(self.New_screen)
+        self.screen_manager.add_widget(screen)
+
+        ######## CONNECTION
+        self.Connection_screen=Connection()
+        screen=Screen(name='Connection')
+        screen.add_widget(self.Connection_screen)
         self.screen_manager.add_widget(screen)
 
         ######## PACING MODES

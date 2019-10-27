@@ -3,6 +3,7 @@
     do_default_tab: False
 
     TabbedPanelItem:
+        id: one
         text: 'AOO'
 
         TableAOO:
@@ -10,6 +11,7 @@
             orientation: 'vertical'
     
     TabbedPanelItem:
+        id: two
         text: 'VOO'
 
         TableVOO:
@@ -115,3 +117,33 @@
     Button:
         text: 'Send' 
 
+<Connection>:
+    text: 'Device Connection'
+    orientation: 'vertical'
+
+    Label:
+        text: 'Device Connection'
+        orientation: 'horizontal'
+        
+    Label:
+        text: root.status()
+        orientation: 'horizontal'
+        color: root.color() 
+
+    Button:
+        text: root.disconnect()
+        halign: 'center'
+        # size_hint_y: 0.15
+
+    Button:
+        text: 'Pacing Modes'
+        opacity: 1 if root.showPacingModes() else 0
+        on_press: root.pacingModesScreen()
+    
+    
+
+    
+        
+    
+    
+    

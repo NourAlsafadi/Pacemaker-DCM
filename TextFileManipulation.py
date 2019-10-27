@@ -16,6 +16,11 @@ def UserPassCheck(username, password):
     usernameFlag=False
     
     for line in fileLines:
+        if line[:-1]==username: 
+            usernameFlag=True
+        else:
+            usernameFlag=False
+        
         if usernameFlag==True:
             if line[:-1]==password:
                 #login info matches records
@@ -23,10 +28,7 @@ def UserPassCheck(username, password):
                 return "True"
                 
         
-        if line[:-1]==username: 
-            usernameFlag=True
-        else:
-            usernameFlag=False
+        
 
 
     accountsFile.close()
@@ -59,9 +61,9 @@ def databaseIsFull():
 
 
 def addUser(username,password):
-    accountsFile=open("Accounts.txt","w")#change to append? find out if append can create new file
+    accountsFile=open("Accounts.txt","a")#change to append? find out if append can create new file
 
-    #add logic to add username and password to end of file    
+     
 
     accountsFile.close()
     
