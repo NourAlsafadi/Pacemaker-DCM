@@ -17,14 +17,13 @@ from kivy.config import Config
 
 from TextFileManipulation import UserPassCheck, databaseIsFull, addUser, passwordConfirm
 
-
 #loads kv file
 Builder.load_file('main.kv')
 
 #prevents the window from being resized and screwing up the float layout
 Config.set('graphics','resizable', False)
 
-#Login screen style and button functionality
+#Login screen stlye and button functionality
 class LoginScreen(FloatLayout):
 
     def __init__(self,**kwargs):
@@ -217,7 +216,7 @@ class PacingModes(FloatLayout):
         self.size=[300,300]
         self.title=Label(text='Pacing Modes',font_size=30,size_hint=[.5,.05],pos=[200,500])
         self.add_widget(self.title)
-
+        
         #### BUTTONS
         
         #AOO#
@@ -311,6 +310,8 @@ class Parameters(TabbedPanel):
 
     def getTab(self):
         return self.get_tab_list(self)
+
+
 class NewScreen(GridLayout):
 
     def __init__(self, **kwargs):
@@ -349,12 +350,12 @@ class PacemakerApp(App):
         screen.add_widget(self.Login_screen)
         #add the screen to the manager
         self.screen_manager.add_widget(screen)
-        
+
         self.NewUserScreen=NewUser()
         screen=Screen(name='NewUser')
         screen.add_widget(self.NewUserScreen)
         self.screen_manager.add_widget(screen)
-        
+
         self.New_screen=NewScreen()
         screen=Screen(name='New')
         screen.add_widget(self.New_screen)
@@ -378,11 +379,10 @@ class PacemakerApp(App):
         screen.add_widget(self.Parameters_screen)
         self.screen_manager.add_widget(screen)
 
-
         return self.screen_manager
 
 
 
 if __name__=='__main__':
-    runtimeApp=PacemakerApp()
+    runtimeApp=MyApp()
     runtimeApp.run()
