@@ -384,5 +384,5 @@ class PacemakerApp(App):
 
 
 if __name__=='__main__':
-    runtimeApp=MyApp()
+    runtimeApp=PacemakerApp()
     runtimeApp.run()
