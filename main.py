@@ -93,9 +93,10 @@ class LoginScreen(FloatLayout):
             elif passwordConfirm(password,passconfirm)==False:
                 self.noMatchPassword.color=[1,1,1,1]
             else:
-                if username!="":
+                if username!="" and password != "":
                     addUser(username,password)
-                
+                    self.noMatchPassword.color=[1,1,1,0]
+                    self.maxNumUsers.color=[1,1,1,0]
             
         self.usernameInput.text=""
         self.passwordInput.text=""

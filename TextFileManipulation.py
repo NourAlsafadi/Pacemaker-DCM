@@ -65,7 +65,8 @@ def addUser(username,password):
     accountsFile.write(password+"\n")
 
     accountsFile.close()
-    
+
+#############
 #debugging function prints every line in file
 #not called by main script
 def FileRead():
