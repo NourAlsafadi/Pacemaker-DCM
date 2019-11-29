@@ -7,14 +7,14 @@ filepath="database.xlsx"  #set directory for the excel file
 book.save(filepath)
 
 USERS = book.get_sheet_by_name('USERS')
-DEVICES = book.get_sheet_by_name('DEVICES')
-CONNECTIONS = book.get_sheet_by_name('CONNECTIONS')
+#DEVICES = book.get_sheet_by_name('DEVICES')
+#CONNECTIONS = book.get_sheet_by_name('CONNECTIONS')
 PARAMETERS = book.get_sheet_by_name('PARAMETERS')
 
 
 numUsers = USERS.max_row
-numDevices = DEVICES.max_row
-numConnections = CONNECTIONS.max_row
+#numDevices = DEVICES.max_row
+#numConnections = CONNECTIONS.max_row
 
 def registerUser(username,password):
     
@@ -26,16 +26,15 @@ def registerUser(username,password):
 
 #def getUserID(username):
 
-def registerDevice(deviceID):
+# def registerDevice(deviceID):
 
-    USERS['B'+str(numDevices)] = deviceID
+#     USERS['B'+str(numDevices)] = deviceID
 
-    #book.save(filepath)
-    return True
+#     #book.save(filepath)
+#     return True
 
-def connectDevice():
-
-    return
+# def connectDevice():
+#     return
 
 def setParameter():
 
