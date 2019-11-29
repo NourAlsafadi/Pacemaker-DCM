@@ -10,19 +10,23 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.button import Button
 from kivy.uix.checkbox import CheckBox
 from kivy.uix.tabbedpanel import TabbedPanel
+from kivy.uix.spinner import Spinner
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.properties import StringProperty
 from kivy.lang import Builder
 from kivy.config import Config
 
 from TextFileManipulation import UserPassCheck, databaseIsFull, addUser, passwordConfirm
+import DatabaseManipulation
 
 #loads kv file
 Builder.load_file('main.kv')
 
 #prevents the window from being resized and screwing up the float layout
 Config.set('graphics','resizable', False)
-
+Config.set('graphics','width', '900')
+Config.set('graphics','height', '700')
+Config.write()
 ###########
 #Login screen stlye and button functionality
 class LoginScreen(FloatLayout):
@@ -37,7 +41,7 @@ class LoginScreen(FloatLayout):
         self.usernameLabel=Label(text='Username',font_size=20,size_hint=[.25,.05],pos=[150,400])
         self.add_widget(self.usernameLabel)
 
-        self.usernameInput=TextInput(multiline=False,size_hint=[.30,.05],pos=[450,400])
+        self.usernameInput=TextInput(write_tab=False,multiline=False,size_hint=[.30,.05],pos=[450,400])
         self.add_widget(self.usernameInput)
 
         self.passwordLabel=Label(text='Password',font_size=20,size_hint=[.25,.05],pos=[150,350])
@@ -46,13 +50,13 @@ class LoginScreen(FloatLayout):
         self.passconfirmLabel=Label(text='Confirm Password',font_size=20,size_hint=[.25,.05],pos=[150,300],color=[1,1,1,0])
         self.add_widget(self.passconfirmLabel)
 
-        self.passwordInput=TextInput(multiline=False,password=True,size_hint=[.30,.05],pos=[450,350])
+        self.passwordInput=TextInput(write_tab=False,multiline=False,password=True,size_hint=[.30,.05],pos=[450,350])
         self.add_widget(self.passwordInput)
 
         self.passconfirmLabel=Label(text='Confirm Password',font_size=20,size_hint=[.25,.05],pos=[150,300],color=[1,1,1,0])
         self.add_widget(self.passconfirmLabel)
 
-        self.passconfirmInput=TextInput(multiline=False,password=True,size_hint=[.30,.05],pos=[450,300],readonly=True,background_color=[1,1,1,0],cursor_color=[1,0,0,0])
+        self.passconfirmInput=TextInput(write_tab=False,multiline=False,password=True,size_hint=[.30,.05],pos=[450,300],readonly=True,background_color=[1,1,1,0],cursor_color=[1,0,0,0])
         self.add_widget(self.passconfirmInput)
 
         self.wrongPassword=Label(text='Username and Password do not match existing users',size_hint=[.4,.05],pos=[250,250],color=[1,1,1,0])
@@ -71,7 +75,6 @@ class LoginScreen(FloatLayout):
         self.switchLayoutButton=Button(text='Register A New User',size_hint=[.2,.05],pos=[310,150])
         self.switchLayoutButton.bind(on_press=self.switchLayoutPress)
         self.add_widget(self.switchLayoutButton)
-
   
     def submitPress(self, instance):
         username=self.usernameInput.text
@@ -93,8 +96,10 @@ class LoginScreen(FloatLayout):
             elif passwordConfirm(password,passconfirm)==False:
                 self.noMatchPassword.color=[1,1,1,1]
             else:
-                if username!="":
-                    addUser(username,password)
+                if username!="" and password != "":
+	                addUser(username,password)
+	                self.noMatchPassword.color=[1,1,1,0]
+	                self.maxNumUsers.color=[1,1,1,0]
                 
             
         self.usernameInput.text=""
@@ -141,8 +146,6 @@ class LoginScreen(FloatLayout):
             self.loginFlag=True
             
 
-
-
 #screen for connecting with device
 class Connection(BoxLayout):
     def __init__(self,**kwargs):
@@ -179,56 +182,66 @@ class Connection(BoxLayout):
         runtimeApp.screen_manager.current='Parameters'
 
 
-#screen for choosing pacing modes
-class PacingModes(FloatLayout):
-   
-    def __init__(self,**kwargs):
-        super(PacingModes,self).__init__(**kwargs)
-        self.size=[300,300]
-        self.title=Label(text='Pacing Modes',font_size=30,size_hint=[.5,.05],pos=[200,500])
-        self.add_widget(self.title)
-        
-        #### BUTTONS
-        
-        #AOO#
-        self.AOO_mode=Button(text='AOO',size_hint=[.25,.25],pos=[400,250])
-        self.AOO_mode.bind(on_press= self.AOOscreen)
-        self.add_widget(self.AOO_mode)
-        
-        #VOO#
-        self.VOO_mode=Button(text='VOO',size_hint=[.25,.25],pos=[200,100])
-        self.VOO_mode.bind(on_press=self.VOOscreen)
-        self.add_widget(self.VOO_mode)
 
-        #AAI#
-        self.AAI_mode=Button(text='AAI',size_hint=[.25,.25],pos=[200,250])
-            #self.AAI_mode.bind(on_press=self.pressed)
-        self.AAI_mode.bind(on_press=self.AAIscreen)
-        self.add_widget(self.AAI_mode)
+    
 
-        #VVI#
-        self.VVI_mode=Button(text='VVI',size_hint=[.25,.25],pos=[400,100])
-        self.VVI_mode.bind(on_press=self.VVIscreen)
-        self.add_widget(self.VVI_mode)
+######################################################### pacing mode parameters
+limits = ['Lower Rate Limit', 'Upper Rate Limit']
+A = ['Atrial Amplitude', 'Atrial Pulse Width'] 
+V = ['Ventricular Amplitude', 'Ventricular Pulse Width'] 
 
-    def AOOscreen(self, instance):
-        runtimeApp.screen_manager.current= 'Parameters'
+AOOParameters = limits + A
+VOOParameters = limits + V
+AAIParameters = limits + A + ['Atrial Sensitivity','ARP','PVARP','Hysteresis','Rate Smoothing'] 
+VVIParameters = limits + V + ['Ventricular Sensitivity','VRP','Hysteresis','Rate Smoothing'] 
 
-    def VOOscreen(self, instance):
-        runtimeApp.screen_manager.current='Parameters'
+common = ['Maximum Sensor Rate','Activity Threshold', 'Reaction Time', 'Response Factor', 'Recovery Time']
 
-    def AAIscreen(self, instance):
-        runtimeApp.screen_manager.current='Parameters'
+AOORParameters = AOOParameters + common 
+VOORParameters = VOOParameters + common
+AAIRParameters = AAIParameters + common
+VVIRParameters = VVIParameters + common
+DOORParameters = limits + A + V + common + ['Fixed AV Delay'] 
+######################################################### parameter values
+tp1 = tuple( [str(x) for x in range(30,55,5)])
+tp2 = tuple( [str(x) for x in range(51,91)] )
+tp3 = tuple( [str(x) for x in range(95,180,5)] )
 
-    def VVIscreen(self, instance):
-        runtimeApp.screen_manager.current= 'Parameters'
+tp4 = tuple( [str(x) for x in range(50,180,5)] )
+tp5 = tuple(["0.05"]) + tuple( [str(x/10) for x in range(1,20,1)] )
+tp6 = tuple( ["off"] + [str(x/10) for x in range(5,33,1)] + [str(x/10) for x in range(35,75,5)] )
 
+tp7 = tuple( ["0.25","0.5","0.7"] + [str(x/10) for x in range(1,11,1)])
+tp8 = tuple( [str(x) for x in range(150,510,10)] )
+tp9 = tuple(["off"] + [str(x) for x in range(3,24,3)] + ["25"])
 
-# pacing mode parameters
-AOOParameters = ['Lower Rate Limit', 'Upper Rate Limit', 'Atrial Amplitude', 'Atrial Pulse Width'] 
-VOOParameters = ['Lower Rate Limit', 'Upper Rate Limit', 'Ventricular Amplitude', 'Ventricular Pulse Width'] 
-AAIParameters = ['Lower Rate Limit', 'Upper Rate Limit', 'Atrial Amplitude', 'Atrial Pulse Width', 'Atrial Sensitivity','ARP','PVARP','Hysteresis','Rate Smoothing'] 
-VVIParameters = ['Lower Rate Limit', 'Upper Rate Limit', 'Ventricular Amplitude', 'Ventricular Pulse Width','Ventricular Sensitivity','VRP','Hysteresis','Rate Smoothing'] 
+tp10 = ("V-Low","Low","Med-Low","Med","Med-High","High","V-High")
+tp11 = tuple([str(x) for x in range(10,60,10)])
+tp12 = tuple([str(x) for x in range(1,17)])
+tp13 = tuple([str(x) for x in range(2,17)])
+tp14 = tuple([str(x) for x in range(70,310,10)])
+
+ParameterValues =	{
+  "Lower Rate Limit": [tp1 + tp2 + tp3,"60"],
+  "Upper Rate Limit": [tp4,"120"],
+  "Atrial Amplitude": [tp6,"3.5"],
+  "Atrial Pulse Width": [tp5,"0.4"],
+  "Ventricular Amplitude": [tp6,"3.5"],
+  "Ventricular Pulse Width": [tp5,"0.5"],
+  "Atrial Sensitivity": [tp7,"0.75"],
+  "ARP": tp8,
+  "PVARP": tp8,
+  "Hysteresis": tuple(["off"]) + tp1 + tp2 + tp3,
+  "Rate Smoothing": tp9,
+  "Ventricular Sensitivity": [tp7,"2.5"],
+  "VRP": [tp8,"320"],
+  "Maximum Sensor Rate": [tp4,"120"],
+  "Activity Threshold": [tp10,"Med"],
+  "Reaction Time": [tp11,"30"],
+  "Response Factor": [tp12,"8"],
+  "Recovery Time": [tp13,"5"],
+  "Fixed AV Delay": [tp14,"150"]
+}
 
 #### Classes to add widgets to screen for each pacing mode
 #refer to main.kv for description of each class
@@ -237,14 +250,25 @@ class TableAOO(BoxLayout):
         super(TableAOO, self).__init__(**kwargs)
         for element in AOOParameters:
             self.add_widget(RowAOO(element))
+
         self.add_widget(statusBar())
         
+
 class RowAOO(BoxLayout):
     txt = StringProperty()
+  
+
     def __init__(self, row, **kwargs):
         super(RowAOO, self).__init__(**kwargs)
         self.txt = row
 
+    def getValues(name):
+        return ParameterValues[name][0]
+
+    def getNominal(name):
+        return ParameterValues[name][1]
+
+#------
 class TableVOO(BoxLayout):
     def __init__(self, **kwargs):
         super(TableVOO, self).__init__(**kwargs)
@@ -257,7 +281,7 @@ class RowVOO(BoxLayout):
     def __init__(self, row, **kwargs):
         super(RowVOO, self).__init__(**kwargs)
         self.txt = row
-
+#------
 class TableAAI(BoxLayout):
     def __init__(self, **kwargs):
         super(TableAAI, self).__init__(**kwargs)
@@ -270,7 +294,7 @@ class RowAAI(BoxLayout):
     def __init__(self, row, **kwargs):
         super(RowAAI, self).__init__(**kwargs)
         self.txt = row
-
+#------
 class TableVVI(BoxLayout):
     def __init__(self, **kwargs):
         super(TableVVI, self).__init__(**kwargs)
@@ -283,7 +307,94 @@ class RowVVI(BoxLayout):
     def __init__(self, row, **kwargs):
         super(RowVVI, self).__init__(**kwargs)
         self.txt = row
+#------
+class TableDOO(BoxLayout):
+    def __init__(self, **kwargs):
+        super(TableDOO, self).__init__(**kwargs)
+        for element in DOOParameters:
+            self.add_widget(RowDOO(element))
+        self.add_widget(statusBar())
+        
+class RowDOO(BoxLayout):
+    txt = StringProperty()
+    def __init__(self, row, **kwargs):
+        super(RowDOO, self).__init__(**kwargs)
+        self.txt = row
+#------
+class TableAOOR(BoxLayout):
+    def __init__(self, **kwargs):
+        super(TableAOOR, self).__init__(**kwargs)
+        for element in AOORParameters:
+            self.add_widget(RowAOOR(element))
+        self.add_widget(statusBar())
+        
+class RowAOOR(BoxLayout):
+    txt = StringProperty()
+    def __init__(self, row, **kwargs):
+        super(RowAOOR, self).__init__(**kwargs)
+        self.txt = row
+#------
+class TableVOOR(BoxLayout):
+    def __init__(self, **kwargs):
+        super(TableVOOR, self).__init__(**kwargs)
+        for element in VOORParameters:
+            self.add_widget(RowVOOR(element))
+        self.add_widget(statusBar())
+        
+class RowVOOR(BoxLayout):
+    txt = StringProperty()
+    def __init__(self, row, **kwargs):
+        super(RowVOOR, self).__init__(**kwargs)
+        self.txt = row
+#------
+class TableAAIR(BoxLayout):
+    def __init__(self, **kwargs):
+        super(TableAAIR, self).__init__(**kwargs)
+        for element in AAIRParameters:
+            self.add_widget(RowAAIR(element))
+        self.add_widget(statusBar())
+        
+class RowAAIR(BoxLayout):
+    txt = StringProperty()
+    def __init__(self, row, **kwargs):
+        super(RowAAIR, self).__init__(**kwargs)
+        self.txt = row
+#------
+class TableVVIR(BoxLayout):
+    def __init__(self, **kwargs):
+        super(TableVVIR, self).__init__(**kwargs)
+        for element in VVIRParameters:
+            self.add_widget(RowVVIR(element))
+        self.add_widget(statusBar())
+        
+class RowVVIR(BoxLayout):
+    txt = StringProperty()
+    def __init__(self, row, **kwargs):
+        super(RowVVIR, self).__init__(**kwargs)
+        self.txt = row
 
+#------
+class TableDOOR(BoxLayout):
+    def __init__(self, **kwargs):
+        super(TableDOOR, self).__init__(**kwargs)
+        
+        self.add_widget(titles())
+        for element in DOORParameters:
+            self.add_widget(RowDOOR(element))
+        self.add_widget(statusBar())
+        
+        
+class RowDOOR(BoxLayout):
+    txt = StringProperty()
+    def __init__(self, row, **kwargs):
+        super(RowDOOR, self).__init__(**kwargs)
+        self.txt = row
+#------
+
+class titles(BoxLayout):
+    def __init__(self,**kwargs):
+        super(titles,self).__init__(**kwargs)
+    
 class statusBar(BoxLayout):
     def __init__(self,**kwargs):
         super(statusBar,self).__init__(**kwargs)
@@ -300,6 +411,16 @@ class Parameters(TabbedPanel):
         
     def getTab(self):
         return self.get_tab_list(self)
+
+
+# def getValues(name):
+#     return ParameterValues[name][0]
+
+# def getNominal(name):
+#     return ParameterValues[name][1]
+
+
+    
 
 
 
@@ -326,11 +447,6 @@ class PacemakerApp(App):
         screen.add_widget(self.Connection_screen)
         self.screen_manager.add_widget(screen)
 
-        ######## PACING MODES
-        self.PacingModes_screen=PacingModes()
-        screen=Screen(name='PacingModes')
-        screen.add_widget(self.PacingModes_screen)
-        self.screen_manager.add_widget(screen)
 
         ######## PARAMETERS
         self.Parameters_screen=Parameters()
@@ -338,17 +454,6 @@ class PacemakerApp(App):
         screen.add_widget(self.Parameters_screen)
         self.screen_manager.add_widget(screen)
 
-        '''
-        self.NewUserScreen=NewUser()
-        screen=Screen(name='NewUser')
-        screen.add_widget(self.NewUserScreen)
-        self.screen_manager.add_widget(screen)
-        
-        self.New_screen=NewScreen()
-        screen=Screen(name='New')
-        screen.add_widget(self.New_screen)
-        self.screen_manager.add_widget(screen)
-        '''
         
         return self.screen_manager
 
@@ -363,73 +468,4 @@ if __name__=='__main__':
 
 
 ########################
-#screen style and functionality to register a new user
-#functionality now handled by class LoginScreen
-#remove?
-'''
-class NewUser(FloatLayout):
 
-    def __init__(self,**kwargs):
-
-        super(NewUser,self).__init__(**kwargs)
-        self.size=[300,300]
-        self.title=Label(text='Register a new user',font_size=30,size_hint=[.5,.05],pos=[200,500])
-        self.add_widget(self.title)
-
-        self.usernameLabel=Label(text='Username',font_size=20,size_hint=[.25,.05],pos=[150,400])
-        self.add_widget(self.usernameLabel)
-        
-        self.usernameInput=TextInput(multiline=False,size_hint=[.30,.05],pos=[450,400])
-        self.add_widget(self.usernameInput)
-
-        self.passwordLabel=Label(text='Password',font_size=20,size_hint=[.25,.05],pos=[150,300])
-        self.add_widget(self.passwordLabel)
-
-        self.passwordInput=TextInput(multiline=False,password=True,size_hint=[.30,.05],pos=[450,300])
-        self.add_widget(self.passwordInput)
-
-        self.passconfirmLabel=Label(text='Confirm Password',font_size=20,size_hint=[.25,.05],pos=[150,200])
-        self.add_widget(self.passconfirmLabel)
-
-        self.passconfirmInput=TextInput(multiline=False,password=True,size_hint=[.30,.05],pos=[450,200])
-        self.add_widget(self.passconfirmInput)
-
-        self.submitButton=Button(text='Submit',size_hint=[.10,.05],pos=[350,100])
-        self.submitButton.bind(on_press=self.pressed)
-        self.add_widget(self.submitButton)
-
-    def pressed(self,instance):
-        print("Button has been pressed")
-        runtimeApp.screen_manager.current='Login'
-
-'''
-
-
-#new screen used in testing
-#remove?
-'''
-class NewScreen(GridLayout):
-
-    def __init__(self, **kwargs):
-
-        super(NewScreen,self).__init__(**kwargs)
-        self.rows=3
-
-        self.label1=Label(text='Hello World')
-        self.add_widget(self.label1)
-
-        self.button1=Button(text='Click me to switch back')
-        self.button1.bind(on_press=self.press)
-        self.add_widget(self.button1)
-
-        self.button2=Button(text='Pacing Modes')
-        self.button2.bind(on_press=self.pressP)
-        self.add_widget(self.button2)
-        
-
-    def press(self, instance):
-        runtimeApp.screen_manager.current='Login'
-
-    def pressP(self, instance):
-        runtimeApp.screen_manager.current='PacingModes'
-'''

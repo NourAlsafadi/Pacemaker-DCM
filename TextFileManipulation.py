@@ -3,6 +3,7 @@ python file manipulation tests
 input username and password and compare
 to text file
 '''
+from DatabaseManipulation import registerUser
 
 #checking if entered username and password are in file
 #used for login
@@ -63,6 +64,8 @@ def addUser(username,password):
 
     accountsFile.write(username+"\n")
     accountsFile.write(password+"\n")
+
+    registerUser(username,password)
 
     accountsFile.close()
     
