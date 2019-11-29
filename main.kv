@@ -1,17 +1,18 @@
-
+#
 <Parameters>:
     do_default_tab: False
 
     TabbedPanelItem:
-        id: one
+        id: AOO
         text: 'AOO'
 
         TableAOO:
             padding: 50, 50, 50, 50
             orientation: 'vertical'
+
     
     TabbedPanelItem:
-        id: two
+        id: VOO
         text: 'VOO'
 
         TableVOO:
@@ -19,6 +20,7 @@
             orientation: 'vertical'
 
     TabbedPanelItem:
+        id: AAI
         text: 'AAI'
 
         TableAAI:
@@ -26,9 +28,53 @@
             orientation: 'vertical'
 
     TabbedPanelItem:
+        id: VVI
         text: 'VVI'
 
         TableVVI:
+            padding: 50, 50, 50, 50
+            orientation: 'vertical'
+    
+    
+
+    
+    TabbedPanelItem:
+        id: AOOR
+        text: 'AOOR'
+
+        TableAOOR:
+            padding: 50, 50, 50, 50
+            orientation: 'vertical'
+    
+    TabbedPanelItem:
+        id: VOOR
+        text: 'VOOR'
+
+        TableVOOR:
+            padding: 50, 50, 50, 50
+            orientation: 'vertical'
+
+    TabbedPanelItem:
+        id: AAIR
+        text: 'AAIR'
+
+        TableAAIR:
+            padding: 50, 10, 50, 10
+            orientation: 'vertical'
+
+    TabbedPanelItem:
+        id: VVIR
+        text: 'VVIR'
+
+        TableVVIR:
+            padding: 50, 10, 50, 10
+            orientation: 'vertical'
+
+    TabbedPanelItem:
+        id: DOOR
+        text: 'DOOR'
+
+        TableDOOR:
             padding: 50, 50, 50, 50
             orientation: 'vertical'
 
@@ -40,21 +86,25 @@
     size_hint_x: 1
 
     Label:
+        id: lab
         text: root.txt
         size_hint_x: 1
 
-    TextInput:        
-        text: root.txt
-        disabled: not CheckBox.active
-        size_hint_x: 1.5
+    # TextInput:        
+    #     text: root.txt
+    #     disabled: not CheckBox.active
+    #     size_hint_x: 1.5
 
     CheckBox:
         id:CheckBox 
         text: 'CheckBox'
         active: False
         size_hint_x: 0.2
-    Button:
-        text: 'Send'  
+    
+    Spinner:        
+        text: root.txt
+        disabled: not CheckBox.active
+        values: root.txt
 
 <RowVOO>:
     spacing: 50
@@ -74,9 +124,7 @@
         text: 'CheckBox'
         active: False
         size_hint_x: 0.2
-    Button:
-        text: 'Send'  
-
+    
 <RowAAI>:
     spacing: 50
     size_hint_x: 1
@@ -95,8 +143,7 @@
         text: 'CheckBox'
         active: False
         size_hint_x: 0.2
-    Button:
-        text: 'Send' 
+    
 
 <RowVVI>:
     spacing: 50
@@ -116,37 +163,148 @@
         text: 'CheckBox'
         active: False
         size_hint_x: 0.2
-    Button:
-        text: 'Send' 
+    
 
+
+<RowAOOR>:
+    spacing: 50
+    size_hint_x: 1
+
+    Label:
+        text: root.txt
+        size_hint_x: 1
+
+    TextInput:        
+        text: root.txt
+        disabled: not CheckBox.active
+        size_hint_x: 1.5
+
+    CheckBox:
+        id:CheckBox 
+        text: 'CheckBox'
+        active: False
+        size_hint_x: 0.2
+    
+  
+<RowVOOR>:
+    spacing: 50
+    size_hint_x: 1
+
+    Label:
+        text: root.txt
+        size_hint_x: 1
+
+    TextInput:
+        text: root.txt
+        disabled: not CheckBox.active
+        size_hint_x: 1.5
+
+    CheckBox:
+        id:CheckBox 
+        text: 'CheckBox'
+        active: False
+        size_hint_x: 0.2
+      
+
+<RowAAIR>:
+    spacing: 50
+    size_hint_x: 1
+    
+    Label:
+        text: root.txt
+        size_hint_x: 1
+
+    TextInput:
+        text: root.txt
+        disabled: not CheckBox.active
+        size_hint_x: 1.5
+
+    CheckBox:
+        id:CheckBox 
+        text: 'CheckBox'
+        active: False
+        size_hint_x: 0.2
+     
+
+<RowVVIR>:
+    spacing: 50
+    size_hint_x: 1
+
+    Label:
+        text: root.txt
+        size_hint_x: 1
+
+    TextInput:
+        text: root.txt
+        disabled: not CheckBox.active
+        size_hint_x: 1.5
+
+    CheckBox:
+        id:CheckBox 
+        text: 'CheckBox'
+        active: False
+        size_hint_x: 0.2
+     
+
+<RowDOOR>:
+    spacing: 50
+    size_hint_x: 1
+
+    Label:
+        text: root.txt
+        size_hint_x: 1
+
+    TextInput:
+        text: root.txt
+        disabled: not CheckBox.active
+        size_hint_x: 1.5
+
+    CheckBox:
+        id:CheckBox 
+        text: 'CheckBox'
+        active: False
+        size_hint_x: 0.2
+    
+        
 <Connection>:
     text: 'Device Connection'
     orientation: 'vertical'
-
+    padding: 150, 50, 150, 50
+    
     Label:
-        text: 'Connected Device: <Device Identifier here>'
+        font_size: 20
+        text: '   Connected Device: \n\n <Device Identifier here>'
+        bold: True
         orientation: 'horizontal'
+        padding: 0,0
         
     Label:
         text: root.status()
+        font_size: 30
+        padding: 0,0
         orientation: 'horizontal'
         color: root.color() 
 	
 	Button:
         text: 'Pacing Modes'
+        font_size: 18
         opacity: 1 if root.showPacingModes() else 0
         on_press: root.pacingModesScreen()
 		
     Button:
         text: root.disconnect()
+        background_color: (0,0.7,1,1) if root.showPacingModes() else (0.0, 1.0, 0.0, 1.0)
         halign: 'center'
+        font_size: 18
         # size_hint_y: 0.15
 
 	Button:
 		text: 'Logout'
+        font_size: 18
 		on_press: root.Logout()
 
 <statusBar>:
+    padding: 5
 	Label:
 		text:'Connected Device: <Device Identifier here>'
 		
@@ -159,8 +317,20 @@
 		background_color: (0.75,0,0,1)
 		on_press: root.returnConnection()
     
+<title>:
+    Label:
+        orientation:'horizontal'
+        text: 'Parameters:'
 
-    
+    Label:
+        orientation:'horizontal'
+        text: 'Value:'
+    Label:
+        orientation:'horizontal'
+        text: 'Enable Edit:'
+
+
+
         
     
     
