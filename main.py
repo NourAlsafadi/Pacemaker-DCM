@@ -13,6 +13,7 @@ from kivy.uix.tabbedpanel import TabbedPanel
 from kivy.uix.spinner import Spinner
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.properties import StringProperty
+from kivy.properties import ObjectProperty
 from kivy.lang import Builder
 from kivy.config import Config
 
@@ -175,6 +176,7 @@ class Connection(BoxLayout):
             return 'Connect to Device'
 
     def Logout(self):
+
         runtimeApp.screen_manager.current='Login'
         
     def pacingModesScreen(self):
@@ -247,25 +249,29 @@ ParameterValues =	{
 class TableAOO(BoxLayout):
     def __init__(self, **kwargs):
         super(TableAOO, self).__init__(**kwargs)
+        self.add_widget(title())
         for element in AOOParameters:
             self.add_widget(RowAOO(element))
 
         self.add_widget(statusBar())
-        
+                
 
 class RowAOO(BoxLayout):
     txt = StringProperty()
-  
+    name = ObjectProperty(None)
+    value = ObjectProperty(None)
 
     def __init__(self, row, **kwargs):
         super(RowAOO, self).__init__(**kwargs)
         self.txt = row
 
-    def getValues(name):
-        return ParameterValues[name][0]
+    def getValues(self):
+        
+        return ParameterValues[self.name.text][0]
 
-    def getNominal(name):
-        return ParameterValues[name][1]
+    def getNominal(self):
+        return ParameterValues[self.name.text][1]
+
 
 #------
 class TableVOO(BoxLayout):
@@ -400,6 +406,10 @@ class statusBar(BoxLayout):
 
     def returnConnection(self):
         runtimeApp.screen_manager.current='Connection'
+
+class title(BoxLayout):
+    def __init__(self,**kwargs):
+        super(title,self).__init__(**kwargs)
 
 ###########
 #screen for displaying and modifying pacing mode parameters

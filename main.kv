@@ -84,27 +84,26 @@
 <RowAOO>:
     spacing: 50
     size_hint_x: 1
+    value: value
+    name: name
 
     Label:
-        id: lab
+        id: name
         text: root.txt
         size_hint_x: 1
+        font_size: 15
 
-    # TextInput:        
-    #     text: root.txt
-    #     disabled: not CheckBox.active
-    #     size_hint_x: 1.5
-
+    Spinner:       
+        id: value
+        text: '1'#root.getNominal()
+        disabled: not CheckBox.active
+        values: '1' #root.getValues()
+    
     CheckBox:
         id:CheckBox 
         text: 'CheckBox'
         active: False
-        size_hint_x: 0.2
-    
-    Spinner:        
-        text: root.txt
-        disabled: not CheckBox.active
-        values: root.txt
+        size_hint_x: 0.75
 
 <RowVOO>:
     spacing: 50
@@ -147,7 +146,7 @@
 
 <RowVVI>:
     spacing: 50
-    size_hint_x: 1
+    size_hint_x: 0.5
 
     Label:
         text: root.txt
@@ -304,31 +303,43 @@
 		on_press: root.Logout()
 
 <statusBar>:
-    padding: 5
+    padding: 8
+
+    Button:
+		text: 'CONNECTION SCREEN'
+		background_color: (0.75,0,0,1)
+		on_press: root.returnConnection()
+
 	Label:
-		text:'Connected Device: <Device Identifier here>'
+		text:' Connected Device:\n<Device Identifier here>'
 		
 	Label:
 		text: 'Status: Connected'
 		color: (0,1,0.5,1)
 	
 	Button:
-		text: 'Return to Connection Screen'
-		background_color: (0.75,0,0,1)
+		text: 'SET ALL'
+		background_color: (0,0.75,0.25,1)
 		on_press: root.returnConnection()
     
 <title>:
     Label:
         orientation:'horizontal'
-        text: 'Parameters:'
+        text: 'PARAMETER'
+        bold: True
+        font_size: 20
+    
+    Label:
+        orientation:'horizontal'
+        text: 'PARAMETER VALUES'
+        bold: True
+        font_size: 20
 
     Label:
         orientation:'horizontal'
-        text: 'Value:'
-    Label:
-        orientation:'horizontal'
-        text: 'Enable Edit:'
-
+        text: 'ENABLE EDIT'
+        bold: True
+        font_size: 20
 
 
         
