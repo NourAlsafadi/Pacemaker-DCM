@@ -65,9 +65,9 @@ def addUser(username,password):
     accountsFile.write(username+"\n")
     accountsFile.write(password+"\n")
 
-    registerUser(username,password)
-
     accountsFile.close()
+
+    registerUser(username,password)
 
 #############
 #debugging function prints every line in file

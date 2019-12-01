@@ -1,10 +1,8 @@
-from openpyxl import Workbook
+from openpyxl import load_workbook
 import TextFileManipulation
 
 
-book = Workbook()    #open a new workbook
-filepath="database.xlsx"  #set directory for the excel file
-book.save(filepath)
+book = load_workbook(filename = 'database.xlsx')
 
 USERS = book.get_sheet_by_name('USERS')
 #DEVICES = book.get_sheet_by_name('DEVICES')
@@ -18,13 +16,19 @@ numUsers = USERS.max_row
 
 def registerUser(username,password):
     
-    USERS['B'+str(numUsers)] = username
-    USERS['C'+str(numUsers)] = password
+    USERS['B'+str(numUsers+1)] = username
+    USERS['C'+str(numUsers+1)] = password
 
-    book.save(filepath)
+    book.save('database.xlsx')
+
     return True
 
-#def getUserID(username):
+def getUserID(username):
+    for row in USERS.iter_rows("E"):
+        for cell in row:
+            if cell.value == username:
+                return USERS.cell(row=cell.row, column=1).value 
+
 
 # def registerDevice(deviceID):
 
@@ -37,6 +41,7 @@ def registerUser(username,password):
 #     return
 
 def setParameter():
+    
 
     return
 
