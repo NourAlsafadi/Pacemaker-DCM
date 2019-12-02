@@ -1,10 +1,12 @@
 #
 <Parameters>:
     do_default_tab: False
+    
 
     TabbedPanelItem:
         id: AOO
         text: 'AOO'
+        on_press: app.currentMode = 'AOO'
 
         TableAOO:
             padding: 50, 50, 50, 50
@@ -14,6 +16,7 @@
     TabbedPanelItem:
         id: VOO
         text: 'VOO'
+        on_press: app.currentMode = 'VOO'
 
         TableVOO:
             padding: 50, 50, 50, 50
@@ -22,6 +25,7 @@
     TabbedPanelItem:
         id: AAI
         text: 'AAI'
+        on_press: app.currentMode = 'AAI'
 
         TableAAI:
             padding: 50, 50, 50, 50
@@ -30,51 +34,18 @@
     TabbedPanelItem:
         id: VVI
         text: 'VVI'
+        on_press: app.currentMode = 'VVI'
 
         TableVVI:
             padding: 50, 50, 50, 50
             orientation: 'vertical'
     
-    
-
-    
     TabbedPanelItem:
-        id: AOOR
-        text: 'AOOR'
+        id: DOO
+        text: 'DOO'
+        on_press: app.currentMode = 'DOO'
 
-        TableAOOR:
-            padding: 50, 50, 50, 50
-            orientation: 'vertical'
-    
-    TabbedPanelItem:
-        id: VOOR
-        text: 'VOOR'
-
-        TableVOOR:
-            padding: 50, 50, 50, 50
-            orientation: 'vertical'
-
-    TabbedPanelItem:
-        id: AAIR
-        text: 'AAIR'
-
-        TableAAIR:
-            padding: 50, 10, 50, 10
-            orientation: 'vertical'
-
-    TabbedPanelItem:
-        id: VVIR
-        text: 'VVIR'
-
-        TableVVIR:
-            padding: 50, 10, 50, 10
-            orientation: 'vertical'
-
-    TabbedPanelItem:
-        id: DOOR
-        text: 'DOOR'
-
-        TableDOOR:
+        TableDOO:
             padding: 50, 50, 50, 50
             orientation: 'vertical'
 
@@ -108,162 +79,102 @@
 <RowVOO>:
     spacing: 50
     size_hint_x: 1
+    value: value
+    name: name
 
     Label:
+        id: name
         text: root.txt
         size_hint_x: 1
+        font_size: 15
 
-    TextInput:
-        text: root.txt
+    Spinner:       
+        id: value
+        text: '1'#root.getNominal()
         disabled: not CheckBox.active
-        size_hint_x: 1.5
-
+        values: '1' #root.getValues()
+    
     CheckBox:
         id:CheckBox 
         text: 'CheckBox'
         active: False
-        size_hint_x: 0.2
+        size_hint_x: 0.75
     
 <RowAAI>:
     spacing: 50
     size_hint_x: 1
+    value: value
+    name: name
 
     Label:
+        id: name
         text: root.txt
         size_hint_x: 1
+        font_size: 15
 
-    TextInput:
-        text: root.txt
+    Spinner:       
+        id: value
+        text: '1'#root.getNominal()
         disabled: not CheckBox.active
-        size_hint_x: 1.5
-
+        values: '1' #root.getValues()
+    
     CheckBox:
         id:CheckBox 
         text: 'CheckBox'
         active: False
-        size_hint_x: 0.2
+        size_hint_x: 0.75
     
 
 <RowVVI>:
     spacing: 50
-    size_hint_x: 0.5
+    size_hint_x: 1
+    value: value
+    name: name
 
     Label:
+        id: name
         text: root.txt
         size_hint_x: 1
+        font_size: 15
 
-    TextInput:
-        text: root.txt
+    Spinner:       
+        id: value
+        text: '1'#root.getNominal()
         disabled: not CheckBox.active
-        size_hint_x: 1.5
-
+        values: '1' #root.getValues()
+    
     CheckBox:
         id:CheckBox 
         text: 'CheckBox'
         active: False
-        size_hint_x: 0.2
+        size_hint_x: 0.75
     
 
 
-<RowAOOR>:
+<RowDOO>:
     spacing: 50
     size_hint_x: 1
+    value: value
+    name: name
 
     Label:
+        id: name
         text: root.txt
         size_hint_x: 1
+        font_size: 15
 
-    TextInput:        
-        text: root.txt
+    Spinner:       
+        id: value
+        text: '1'#root.getNominal()
         disabled: not CheckBox.active
-        size_hint_x: 1.5
-
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.2
+        values: '1' #root.getValues()
     
-  
-<RowVOOR>:
-    spacing: 50
-    size_hint_x: 1
-
-    Label:
-        text: root.txt
-        size_hint_x: 1
-
-    TextInput:
-        text: root.txt
-        disabled: not CheckBox.active
-        size_hint_x: 1.5
-
     CheckBox:
         id:CheckBox 
         text: 'CheckBox'
         active: False
-        size_hint_x: 0.2
-      
+        size_hint_x: 0.75
 
-<RowAAIR>:
-    spacing: 50
-    size_hint_x: 1
-    
-    Label:
-        text: root.txt
-        size_hint_x: 1
-
-    TextInput:
-        text: root.txt
-        disabled: not CheckBox.active
-        size_hint_x: 1.5
-
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.2
-     
-
-<RowVVIR>:
-    spacing: 50
-    size_hint_x: 1
-
-    Label:
-        text: root.txt
-        size_hint_x: 1
-
-    TextInput:
-        text: root.txt
-        disabled: not CheckBox.active
-        size_hint_x: 1.5
-
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.2
-     
-
-<RowDOOR>:
-    spacing: 50
-    size_hint_x: 1
-
-    Label:
-        text: root.txt
-        size_hint_x: 1
-
-    TextInput:
-        text: root.txt
-        disabled: not CheckBox.active
-        size_hint_x: 1.5
-
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.2
-    
         
 <Connection>:
     text: 'Device Connection'

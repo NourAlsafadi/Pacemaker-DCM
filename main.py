@@ -29,6 +29,7 @@ Config.set('graphics','width', '900')
 Config.set('graphics','height', '700')
 Config.write()
 ###########
+
 #Login screen stlye and button functionality
 class LoginScreen(FloatLayout):
 
@@ -144,7 +145,6 @@ class LoginScreen(FloatLayout):
             self.switchLayoutButton.text='Register a new user'
 
             self.loginFlag=True
-            
 
 #screen for connecting with device
 class Connection(BoxLayout):
@@ -182,10 +182,6 @@ class Connection(BoxLayout):
     def pacingModesScreen(self):
         runtimeApp.screen_manager.current='Parameters'
 
-
-
-    
-
 ######################################################### pacing mode parameters
 limits = ['Lower Rate Limit', 'Upper Rate Limit']
 A = ['Atrial Amplitude', 'Atrial Pulse Width'] 
@@ -195,14 +191,10 @@ AOOParameters = limits + A
 VOOParameters = limits + V
 AAIParameters = limits + A + ['Atrial Sensitivity','ARP','PVARP','Hysteresis','Rate Smoothing'] 
 VVIParameters = limits + V + ['Ventricular Sensitivity','VRP','Hysteresis','Rate Smoothing'] 
+DOOParameters = limits + A + V + ['Fixed AV Delay'] 
 
-common = ['Maximum Sensor Rate','Activity Threshold', 'Reaction Time', 'Response Factor', 'Recovery Time']
+#common = ['Maximum Sensor Rate','Activity Threshold', 'Reaction Time', 'Response Factor', 'Recovery Time']
 
-AOORParameters = AOOParameters + common 
-VOORParameters = VOOParameters + common
-AAIRParameters = AAIParameters + common
-VVIRParameters = VVIParameters + common
-DOORParameters = limits + A + V + common + ['Fixed AV Delay'] 
 ######################################################### parameter values
 tp1 = tuple( [str(x) for x in range(30,55,5)])
 tp2 = tuple( [str(x) for x in range(51,91)] )
@@ -244,8 +236,12 @@ ParameterValues =	{
   "Fixed AV Delay": [tp14,"150"]
 }
 
+
+
 #### Classes to add widgets to screen for each pacing mode
 #refer to main.kv for description of each class
+#------
+
 class TableAOO(BoxLayout):
     def __init__(self, **kwargs):
         super(TableAOO, self).__init__(**kwargs)
@@ -253,30 +249,27 @@ class TableAOO(BoxLayout):
         for element in AOOParameters:
             self.add_widget(RowAOO(element))
 
-        self.add_widget(statusBar())
-                
+        self.add_widget(statusBar())                
 
 class RowAOO(BoxLayout):
     txt = StringProperty()
-    name = ObjectProperty(None)
-    value = ObjectProperty(None)
+    val = StringProperty()
 
     def __init__(self, row, **kwargs):
         super(RowAOO, self).__init__(**kwargs)
         self.txt = row
 
-    def getValues(self):
-        
-        return ParameterValues[self.name.text][0]
+    def getValues(self):        
+        return ParameterValues[self.val][0]
 
     def getNominal(self):
-        return ParameterValues[self.name.text][1]
-
-
+        return ParameterValues[self.val][1]
+        
 #------
 class TableVOO(BoxLayout):
     def __init__(self, **kwargs):
         super(TableVOO, self).__init__(**kwargs)
+        self.add_widget(title())
         for element in VOOParameters:
             self.add_widget(RowVOO(element))
         self.add_widget(statusBar())
@@ -290,6 +283,7 @@ class RowVOO(BoxLayout):
 class TableAAI(BoxLayout):
     def __init__(self, **kwargs):
         super(TableAAI, self).__init__(**kwargs)
+        self.add_widget(title())
         for element in AAIParameters:
             self.add_widget(RowAAI(element))
         self.add_widget(statusBar())
@@ -303,6 +297,7 @@ class RowAAI(BoxLayout):
 class TableVVI(BoxLayout):
     def __init__(self, **kwargs):
         super(TableVVI, self).__init__(**kwargs)
+        self.add_widget(title())
         for element in VVIParameters:
             self.add_widget(RowVVI(element))
         self.add_widget(statusBar())
@@ -316,6 +311,7 @@ class RowVVI(BoxLayout):
 class TableDOO(BoxLayout):
     def __init__(self, **kwargs):
         super(TableDOO, self).__init__(**kwargs)
+        self.add_widget(title())
         for element in DOOParameters:
             self.add_widget(RowDOO(element))
         self.add_widget(statusBar())
@@ -326,80 +322,6 @@ class RowDOO(BoxLayout):
         super(RowDOO, self).__init__(**kwargs)
         self.txt = row
 #------
-class TableAOOR(BoxLayout):
-    def __init__(self, **kwargs):
-        super(TableAOOR, self).__init__(**kwargs)
-        for element in AOORParameters:
-            self.add_widget(RowAOOR(element))
-        self.add_widget(statusBar())
-        
-class RowAOOR(BoxLayout):
-    txt = StringProperty()
-    def __init__(self, row, **kwargs):
-        super(RowAOOR, self).__init__(**kwargs)
-        self.txt = row
-#------
-class TableVOOR(BoxLayout):
-    def __init__(self, **kwargs):
-        super(TableVOOR, self).__init__(**kwargs)
-        for element in VOORParameters:
-            self.add_widget(RowVOOR(element))
-        self.add_widget(statusBar())
-        
-class RowVOOR(BoxLayout):
-    txt = StringProperty()
-    def __init__(self, row, **kwargs):
-        super(RowVOOR, self).__init__(**kwargs)
-        self.txt = row
-#------
-class TableAAIR(BoxLayout):
-    def __init__(self, **kwargs):
-        super(TableAAIR, self).__init__(**kwargs)
-        for element in AAIRParameters:
-            self.add_widget(RowAAIR(element))
-        self.add_widget(statusBar())
-        
-class RowAAIR(BoxLayout):
-    txt = StringProperty()
-    def __init__(self, row, **kwargs):
-        super(RowAAIR, self).__init__(**kwargs)
-        self.txt = row
-#------
-class TableVVIR(BoxLayout):
-    def __init__(self, **kwargs):
-        super(TableVVIR, self).__init__(**kwargs)
-        for element in VVIRParameters:
-            self.add_widget(RowVVIR(element))
-        self.add_widget(statusBar())
-        
-class RowVVIR(BoxLayout):
-    txt = StringProperty()
-    def __init__(self, row, **kwargs):
-        super(RowVVIR, self).__init__(**kwargs)
-        self.txt = row
-
-#------
-class TableDOOR(BoxLayout):
-    def __init__(self, **kwargs):
-        super(TableDOOR, self).__init__(**kwargs)
-        
-        self.add_widget(titles())
-        for element in DOORParameters:
-            self.add_widget(RowDOOR(element))
-        self.add_widget(statusBar())
-        
-        
-class RowDOOR(BoxLayout):
-    txt = StringProperty()
-    def __init__(self, row, **kwargs):
-        super(RowDOOR, self).__init__(**kwargs)
-        self.txt = row
-#------
-
-class titles(BoxLayout):
-    def __init__(self,**kwargs):
-        super(titles,self).__init__(**kwargs)
-    
 class statusBar(BoxLayout):
     def __init__(self,**kwargs):
         super(statusBar,self).__init__(**kwargs)
@@ -417,37 +339,25 @@ class Parameters(TabbedPanel):
     def __init__(self, **kwargs):
         super(Parameters, self).__init__(**kwargs)
         
-        
     def getTab(self):
         return self.get_tab_list(self)
-
-
-# def getValues(name):
-#     return ParameterValues[name][0]
-
-# def getNominal(name):
-#     return ParameterValues[name][1]
-
-
-    
-
-
 
 ##########
 #app (screen_manager)
 class PacemakerApp(App):
+    currentMode = StringProperty()
+    print(currentMode)
 
     def build(self):
         self.screen_manager=ScreenManager()
-
         ####### Login
         #instantiate class above describing screen
         self.Login_screen=LoginScreen()
         #create screen object
         screen=Screen(name='Login')
-        #add class instance to describe screen
+        # add class instance to describe screen
         screen.add_widget(self.Login_screen)
-        #add the screen to the manager
+        # add the screen to the manager
         self.screen_manager.add_widget(screen)
         
         ######## CONNECTION
@@ -476,5 +386,5 @@ if __name__=='__main__':
 
 
 
-########################
+###########
 
