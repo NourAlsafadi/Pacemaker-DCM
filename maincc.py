@@ -183,191 +183,95 @@ class Connection(BoxLayout):
     def pacingModesScreen(self):
         runtimeApp.screen_manager.current='Parameters'
 
+######################################################### pacing mode parameters
+limits = ['Lower Rate Limit', 'Upper Rate Limit']
+A = ['Atrial Amplitude', 'Atrial Pulse Width'] 
+V = ['Ventricular Amplitude', 'Ventricular Pulse Width'] 
+
+AOOParameters = limits + A
+VOOParameters = limits + V
+AAIParameters = limits + A + ['Atrial Sensitivity','ARP','PVARP','Hysteresis','Rate Smoothing'] 
+VVIParameters = limits + V + ['Ventricular Sensitivity','VRP','Hysteresis','Rate Smoothing'] 
+DOOParameters = limits + A + V + ['Fixed AV Delay'] 
+
 #### Classes to add widgets to screen for each pacing mode
 #refer to main.kv for description of each class
 #------
+
 
 class TableAOO(BoxLayout):
     def __init__(self, **kwargs):
         super(TableAOO, self).__init__(**kwargs)
         self.add_widget(title())
 
-        self.add_widget(RowAOO1())
-        self.add_widget(RowAOO2())
-        self.add_widget(RowAOO3())
-        self.add_widget(RowAOO4())
+        for element in AOOParameters:
+            self.add_widget(RowAOO1())
+            self.add_widget(RowAOO2())
+            self.add_widget(RowAOO3())
+            self.add_widget(RowAOO4())
 
         self.add_widget(statusBar())                
 
 class RowAOO1(BoxLayout):
     def __init__(self, **kwargs):
-        super(RowAOO1, self).__init__(**kwargs)
-class RowAOO2(BoxLayout):
-    def __init__(self, **kwargs):
-        super(RowAOO2, self).__init__(**kwargs)
-class RowAOO3(BoxLayout):
-    def __init__(self, **kwargs):
-        super(RowAOO3, self).__init__(**kwargs)
-class RowAOO4(BoxLayout):
-    def __init__(self, **kwargs):
-        super(RowAOO4, self).__init__(**kwargs)
+        super(RowAOO, self).__init__(**kwargs)
 
 #------
 class TableVOO(BoxLayout):
     def __init__(self, **kwargs):
         super(TableVOO, self).__init__(**kwargs)
         self.add_widget(title())
-            
-        self.add_widget(RowVOO1())
-        self.add_widget(RowVOO2())
-        self.add_widget(RowVOO3())
-        self.add_widget(RowVOO4())
-
+        for element in VOOParameters:
+            self.add_widget(RowVOO(element))
         self.add_widget(statusBar())
         
-class RowVOO1(BoxLayout):
-    def __init__(self,**kwargs):
-        super(RowVOO1, self).__init__(**kwargs)
-class RowVOO2(BoxLayout):
-    def __init__(self,**kwargs):
-        super(RowVOO2, self).__init__(**kwargs)
-class RowVOO3(BoxLayout):
-    def __init__(self,**kwargs):
-        super(RowVOO3, self).__init__(**kwargs)
-class RowVOO4(BoxLayout):
-    def __init__(self,**kwargs):
-        super(RowVOO4, self).__init__(**kwargs)
-
+class RowVOO(BoxLayout):
+    txt = StringProperty()
+    def __init__(self, row, **kwargs):
+        super(RowVOO, self).__init__(**kwargs)
+        self.txt = row
 #------
 class TableAAI(BoxLayout):
     def __init__(self, **kwargs):
         super(TableAAI, self).__init__(**kwargs)
         self.add_widget(title())
-        
-        self.add_widget(RowAAI1())
-        self.add_widget(RowAAI2())
-        self.add_widget(RowAAI3())
-        self.add_widget(RowAAI4())
-        self.add_widget(RowAAI5())
-        self.add_widget(RowAAI6())
-        self.add_widget(RowAAI7())
-        self.add_widget(RowAAI8())
-        self.add_widget(RowAAI9())
-        
+        for element in AAIParameters:
+            self.add_widget(RowAAI(element))
         self.add_widget(statusBar())
         
-class RowAAI1(BoxLayout):
-    def __init__(self,**kwargs):
-        super(RowAAI1, self).__init__(**kwargs)
-class RowAAI2(BoxLayout):
-    def __init__(self, **kwargs):
-        super(RowAAI2, self).__init__(**kwargs)
-class RowAAI3(BoxLayout):
-    def __init__(self, **kwargs):
-        super(RowAAI3, self).__init__(**kwargs)
-class RowAAI4(BoxLayout):
-    def __init__(self, **kwargs):
-        super(RowAAI4, self).__init__(**kwargs)
-class RowAAI5(BoxLayout):
-    def __init__(self, **kwargs):
-        super(RowAAI5, self).__init__(**kwargs)
-class RowAAI6(BoxLayout):
-    def __init__(self, **kwargs):
-        super(RowAAI6, self).__init__(**kwargs)
-class RowAAI7(BoxLayout):
-    def __init__(self, **kwargs):
-        super(RowAAI7, self).__init__(**kwargs)
-class RowAAI8(BoxLayout):
-    def __init__(self, **kwargs):
-        super(RowAAI8, self).__init__(**kwargs)
-class RowAAI9(BoxLayout):
-    def __init__(self, **kwargs):
-        super(RowAAI9, self).__init__(**kwargs)
-
-
+class RowAAI(BoxLayout):
+    txt = StringProperty()
+    def __init__(self, row, **kwargs):
+        super(RowAAI, self).__init__(**kwargs)
+        self.txt = row
 #------
 class TableVVI(BoxLayout):
     def __init__(self, **kwargs):
         super(TableVVI, self).__init__(**kwargs)
-        
         self.add_widget(title())
-
-        self.add_widget(RowVVI1())
-        self.add_widget(RowVVI2())
-        self.add_widget(RowVVI3())
-        self.add_widget(RowVVI4())
-        self.add_widget(RowVVI5())
-        self.add_widget(RowVVI6())
-        self.add_widget(RowVVI7())
-        self.add_widget(RowVVI8())
-
+        for element in VVIParameters:
+            self.add_widget(RowVVI(element))
         self.add_widget(statusBar())
         
-class RowVVI1(BoxLayout):
-    def __init__(self, **kwargs):
-        super(RowVVI1, self).__init__(**kwargs)
-class RowVVI2(BoxLayout):
-    def __init__(self, **kwargs):
-        super(RowVVI2, self).__init__(**kwargs)
-class RowVVI3(BoxLayout):
-    def __init__(self, **kwargs):
-        super(RowVVI3, self).__init__(**kwargs)
-class RowVVI4(BoxLayout):
-    def __init__(self, **kwargs):
-        super(RowVVI4, self).__init__(**kwargs)
-class RowVVI5(BoxLayout):
-    def __init__(self, **kwargs):
-        super(RowVVI5, self).__init__(**kwargs)
-class RowVVI6(BoxLayout):
-    def __init__(self, **kwargs):
-        super(RowVVI6, self).__init__(**kwargs)
-class RowVVI7(BoxLayout):
-    def __init__(self, **kwargs):
-        super(RowVVI7, self).__init__(**kwargs)
-class RowVVI8(BoxLayout):
-    def __init__(self, **kwargs):
-        super(RowVVI8, self).__init__(**kwargs)
-
-
+class RowVVI(BoxLayout):
+    txt = StringProperty()
+    def __init__(self, row, **kwargs):
+        super(RowVVI, self).__init__(**kwargs)
+        self.txt = row
 #------
 class TableDOO(BoxLayout):
     def __init__(self, **kwargs):
         super(TableDOO, self).__init__(**kwargs)
-        
         self.add_widget(title())
-        
-        self.add_widget(RowDOO1())
-        self.add_widget(RowDOO2())
-        self.add_widget(RowDOO3())
-        self.add_widget(RowDOO4())
-        self.add_widget(RowDOO5())
-        self.add_widget(RowDOO6())
-        self.add_widget(RowDOO7())
-
+        for element in DOOParameters:
+            self.add_widget(RowDOO(element))
         self.add_widget(statusBar())
         
-class RowDOO1(BoxLayout):
-    def __init__(self, **kwargs):
-        super(RowDOO1, self).__init__(**kwargs)
-class RowDOO2(BoxLayout):
-    def __init__(self, **kwargs):
-        super(RowDOO2, self).__init__(**kwargs)
-class RowDOO3(BoxLayout):
-    def __init__(self, **kwargs):
-        super(RowDOO3, self).__init__(**kwargs)
-class RowDOO4(BoxLayout):
-    def __init__(self, **kwargs):
-        super(RowDOO4, self).__init__(**kwargs)
-class RowDOO5(BoxLayout):
-    def __init__(self, **kwargs):
-        super(RowDOO5, self).__init__(**kwargs)
-class RowDOO6(BoxLayout):
-    def __init__(self, **kwargs):
-        super(RowDOO6, self).__init__(**kwargs)
-class RowDOO7(BoxLayout):
-    def __init__(self, **kwargs):
-        super(RowDOO7, self).__init__(**kwargs)
-
+class RowDOO(BoxLayout):
+    txt = StringProperty()
+    def __init__(self, row, **kwargs):
+        super(RowDOO, self).__init__(**kwargs)
+        self.txt = row
 #------
 class statusBar(BoxLayout):
     def __init__(self,**kwargs):
@@ -392,7 +296,7 @@ class Parameters(TabbedPanel):
 ##########
 #app (screen_manager)
 class PacemakerApp(App):
-    currentMode = StringProperty('AOO')
+    currentMode = StringProperty()
 
     def build(self):
         self.screen_manager=ScreenManager()

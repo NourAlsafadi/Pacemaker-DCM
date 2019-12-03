@@ -26,9 +26,6 @@ def UserPassCheck(username, password):
             usernameFlag=True
         else:
             usernameFlag=False
-        
-        
-
 
     accountsFile.close()
 
