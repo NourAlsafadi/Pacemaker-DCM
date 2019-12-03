@@ -88,6 +88,7 @@ class LoginScreen(FloatLayout):
             #logic to check username and password are correct
             if UserPassCheck(username,password) and username!="":
                 self.wrongPassword.color=[1,1,1,0]
+                DatabaseManipulation.activeUser = username
                 runtimeApp.screen_manager.current='Connection'
             else:
                 self.wrongPassword.color=[1,1,1,1]
@@ -196,6 +197,15 @@ class TableAOO(BoxLayout):
         self.add_widget(RowAOO2())
         self.add_widget(RowAOO3())
         self.add_widget(RowAOO4())
+        self.add_widget(RowAOO5())
+        self.add_widget(RowAOO6())
+        self.add_widget(RowAOO7())
+        self.add_widget(RowAOO8())
+        self.add_widget(RowAOO9())
+        self.add_widget(RowAOO10())
+        self.add_widget(RowAOO11())
+        self.add_widget(RowAOO12())
+        self.add_widget(RowAOO13())
 
         self.add_widget(statusBar())                
 
@@ -211,6 +221,33 @@ class RowAOO3(BoxLayout):
 class RowAOO4(BoxLayout):
     def __init__(self, **kwargs):
         super(RowAOO4, self).__init__(**kwargs)
+class RowAOO5(BoxLayout):
+    def __init__(self, **kwargs):
+        super(RowAOO5, self).__init__(**kwargs)
+class RowAOO6(BoxLayout):
+    def __init__(self, **kwargs):
+        super(RowAOO6, self).__init__(**kwargs)
+class RowAOO7(BoxLayout):
+    def __init__(self, **kwargs):
+        super(RowAOO7, self).__init__(**kwargs)
+class RowAOO8(BoxLayout):
+    def __init__(self, **kwargs):
+        super(RowAOO8, self).__init__(**kwargs)
+class RowAOO9(BoxLayout):
+    def __init__(self, **kwargs):
+        super(RowAOO9, self).__init__(**kwargs)
+class RowAOO10(BoxLayout):
+    def __init__(self, **kwargs):
+        super(RowAOO10, self).__init__(**kwargs)
+class RowAOO11(BoxLayout):
+    def __init__(self, **kwargs):
+        super(RowAOO11, self).__init__(**kwargs)
+class RowAOO12(BoxLayout):
+    def __init__(self, **kwargs):
+        super(RowAOO12, self).__init__(**kwargs)
+class RowAOO13(BoxLayout):
+    def __init__(self, **kwargs):
+        super(RowAOO13, self).__init__(**kwargs)
 
 #------
 class TableVOO(BoxLayout):
@@ -222,6 +259,15 @@ class TableVOO(BoxLayout):
         self.add_widget(RowVOO2())
         self.add_widget(RowVOO3())
         self.add_widget(RowVOO4())
+        self.add_widget(RowVOO5())
+        self.add_widget(RowVOO6())
+        self.add_widget(RowVOO7())
+        self.add_widget(RowVOO8())
+        self.add_widget(RowVOO9())
+        self.add_widget(RowVOO10())
+        self.add_widget(RowVOO11())
+        self.add_widget(RowVOO12())
+        self.add_widget(RowVOO13())
 
         self.add_widget(statusBar())
         
@@ -237,6 +283,33 @@ class RowVOO3(BoxLayout):
 class RowVOO4(BoxLayout):
     def __init__(self,**kwargs):
         super(RowVOO4, self).__init__(**kwargs)
+class RowVOO5(BoxLayout):
+    def __init__(self, **kwargs):
+        super(RowVOO5, self).__init__(**kwargs)
+class RowVOO6(BoxLayout):
+    def __init__(self, **kwargs):
+        super(RowVOO6, self).__init__(**kwargs)
+class RowVOO7(BoxLayout):
+    def __init__(self, **kwargs):
+        super(RowVOO7, self).__init__(**kwargs)
+class RowVOO8(BoxLayout):
+    def __init__(self, **kwargs):
+        super(RowVOO8, self).__init__(**kwargs)
+class RowVOO9(BoxLayout):
+    def __init__(self, **kwargs):
+        super(RowVOO9, self).__init__(**kwargs)
+class RowVOO10(BoxLayout):
+    def __init__(self, **kwargs):
+        super(RowVOO10, self).__init__(**kwargs)
+class RowVOO11(BoxLayout):
+    def __init__(self, **kwargs):
+        super(RowVOO11, self).__init__(**kwargs)
+class RowVOO12(BoxLayout):
+    def __init__(self, **kwargs):
+        super(RowVOO12, self).__init__(**kwargs)
+class RowVOO13(BoxLayout):
+    def __init__(self, **kwargs):
+        super(RowVOO13, self).__init__(**kwargs)
 
 #------
 class TableAAI(BoxLayout):
@@ -253,6 +326,10 @@ class TableAAI(BoxLayout):
         self.add_widget(RowAAI7())
         self.add_widget(RowAAI8())
         self.add_widget(RowAAI9())
+        self.add_widget(RowAAI10())
+        self.add_widget(RowAAI11())
+        self.add_widget(RowAAI12())
+        self.add_widget(RowAAI13())
         
         self.add_widget(statusBar())
         
@@ -283,6 +360,18 @@ class RowAAI8(BoxLayout):
 class RowAAI9(BoxLayout):
     def __init__(self, **kwargs):
         super(RowAAI9, self).__init__(**kwargs)
+class RowAAI10(BoxLayout):
+    def __init__(self, **kwargs):
+        super(RowAAI10, self).__init__(**kwargs)
+class RowAAI11(BoxLayout):
+    def __init__(self, **kwargs):
+        super(RowAAI11, self).__init__(**kwargs)
+class RowAAI12(BoxLayout):
+    def __init__(self, **kwargs):
+        super(RowAAI12, self).__init__(**kwargs)
+class RowAAI13(BoxLayout):
+    def __init__(self, **kwargs):
+        super(RowAAI13, self).__init__(**kwargs)
 
 
 #------
@@ -300,6 +389,11 @@ class TableVVI(BoxLayout):
         self.add_widget(RowVVI6())
         self.add_widget(RowVVI7())
         self.add_widget(RowVVI8())
+        self.add_widget(RowVVI9())
+        self.add_widget(RowVVI10())
+        self.add_widget(RowVVI11())
+        self.add_widget(RowVVI12())
+        self.add_widget(RowVVI13())
 
         self.add_widget(statusBar())
         
@@ -327,13 +421,28 @@ class RowVVI7(BoxLayout):
 class RowVVI8(BoxLayout):
     def __init__(self, **kwargs):
         super(RowVVI8, self).__init__(**kwargs)
+class RowVVI9(BoxLayout):
+    def __init__(self, **kwargs):
+        super(RowVVI9, self).__init__(**kwargs)
+class RowVVI10(BoxLayout):
+    def __init__(self, **kwargs):
+        super(RowVVI10, self).__init__(**kwargs)
+class RowVVI11(BoxLayout):
+    def __init__(self, **kwargs):
+        super(RowVVI11, self).__init__(**kwargs)
+class RowVVI12(BoxLayout):
+    def __init__(self, **kwargs):
+        super(RowVVI12, self).__init__(**kwargs)
+class RowVVI13(BoxLayout):
+    def __init__(self, **kwargs):
+        super(RowVVI13, self).__init__(**kwargs)
 
 
 #------
 class TableDOO(BoxLayout):
     def __init__(self, **kwargs):
         super(TableDOO, self).__init__(**kwargs)
-        
+
         self.add_widget(title())
         
         self.add_widget(RowDOO1())
@@ -343,6 +452,12 @@ class TableDOO(BoxLayout):
         self.add_widget(RowDOO5())
         self.add_widget(RowDOO6())
         self.add_widget(RowDOO7())
+        self.add_widget(RowDOO8())
+        self.add_widget(RowDOO9())
+        self.add_widget(RowDOO10())
+        self.add_widget(RowDOO11())
+        self.add_widget(RowDOO12())
+        self.add_widget(RowDOO13())
 
         self.add_widget(statusBar())
         
@@ -367,6 +482,24 @@ class RowDOO6(BoxLayout):
 class RowDOO7(BoxLayout):
     def __init__(self, **kwargs):
         super(RowDOO7, self).__init__(**kwargs)
+class RowDOO8(BoxLayout):
+    def __init__(self, **kwargs):
+        super(RowDOO8, self).__init__(**kwargs)
+class RowDOO9(BoxLayout):
+    def __init__(self, **kwargs):
+        super(RowDOO9, self).__init__(**kwargs)
+class RowDOO10(BoxLayout):
+    def __init__(self, **kwargs):
+        super(RowDOO10, self).__init__(**kwargs)
+class RowDOO11(BoxLayout):
+    def __init__(self, **kwargs):
+        super(RowDOO11, self).__init__(**kwargs)
+class RowDOO12(BoxLayout):
+    def __init__(self, **kwargs):
+        super(RowDOO12, self).__init__(**kwargs)
+class RowDOO13(BoxLayout):
+    def __init__(self, **kwargs):
+        super(RowDOO13, self).__init__(**kwargs)
 
 #------
 class statusBar(BoxLayout):
@@ -375,6 +508,9 @@ class statusBar(BoxLayout):
 
     def returnConnection(self):
         runtimeApp.screen_manager.current='Connection'
+    
+    def setAll(self):
+        DatabaseManipulation.setParameters()
 
 class title(BoxLayout):
     def __init__(self,**kwargs):
@@ -385,9 +521,6 @@ class title(BoxLayout):
 class Parameters(TabbedPanel):
     def __init__(self, **kwargs):
         super(Parameters, self).__init__(**kwargs)
-        
-    def getTab(self):
-        return self.get_tab_list(self)
 
 ##########
 #app (screen_manager)
