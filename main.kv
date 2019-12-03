@@ -1,4 +1,5 @@
 #:import p Parameters
+#:import d DatabaseManipulation
 <Parameters>:
     do_default_tab: False
     
@@ -7,6 +8,7 @@
         id: AOO
         text: 'AOO'
         on_press: app.currentMode = 'AOO'
+        on_press: d.currentM = 'AOO'
 
         TableAOO:
             padding: 50, 50, 50, 50
@@ -18,6 +20,7 @@
         id: VOO
         text: 'VOO'
         on_press: app.currentMode = 'VOO'
+        on_press: d.currentM = 'VOO'
 
         TableVOO:
             padding: 50, 50, 50, 50
@@ -27,6 +30,7 @@
         id: AAI
         text: 'AAI'
         on_press: app.currentMode = 'AAI'
+        on_press: d.currentM = 'AAI'
 
         TableAAI:
             padding: 50, 50, 50, 50
@@ -36,6 +40,7 @@
         id: VVI
         text: 'VVI'
         on_press: app.currentMode = 'VVI'
+        on_press: d.currentM = 'VVI'
 
         TableVVI:
             padding: 50, 50, 50, 50
@@ -45,6 +50,7 @@
         id: DOO
         text: 'DOO'
         on_press: app.currentMode = 'DOO'
+        on_press: d.currentM = 'DOO'
 
         TableDOO:
             padding: 50, 50, 50, 50
@@ -65,18 +71,10 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.AOOParameters[0]][1]
-        disabled: not CheckBox.active
-        values: p.ParameterValues[p.AOOParameters[0]][0]
-        
-    
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.75
-
-
+        text: p.ParameterValues[p.allParameters[0]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[0]][0]
+        on_press: p.allValuesAOO[0] = self.text
 
 
 <RowAOO2>:
@@ -85,22 +83,17 @@
 
 
     Label:
-        text: p.AOOParameters[1]
+        text: p.allParameters[1]
         size_hint_x: 1
         font_size: 15
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.AOOParameters[1]][1]
-        disabled: not CheckBox.active
-        values: p.ParameterValues[p.AOOParameters[1]][0]
-        
-    
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.75
+        text: p.ParameterValues[p.allParameters[1]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[1]][0]
+        on_press: p.allValuesAOO[1] = self.text
+
 
 <RowAOO3>:
     spacing: 50
@@ -108,22 +101,17 @@
 
 
     Label:
-        text: p.AOOParameters[2]
+        text: p.allParameters[2]
         size_hint_x: 1
         font_size: 15
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.AOOParameters[2]][1]
-        disabled: not CheckBox.active
-        values: p.ParameterValues[p.AOOParameters[2]][0]
+        text: p.ParameterValues[p.allParameters[2]][1]
+        disabled: True
+        values: p.ParameterValues[p.allParameters[2]][0]
+        on_press: p.allValuesAOO[2] = self.text
         
-    
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.75
 
 
 <RowAOO4>:
@@ -132,22 +120,182 @@
 
 
     Label:
-        text: p.AOOParameters[3]
+        text: p.allParameters[3]
         size_hint_x: 1
         font_size: 15
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.AOOParameters[3]][1]
-        disabled: not CheckBox.active
-        values: p.ParameterValues[p.AOOParameters[3]][0]
+        text: p.ParameterValues[p.allParameters[3]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[3]][0]
+        on_press: p.allValuesAOO[3] = self.text
+        
+
+<RowAOO5>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[4]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: p.ParameterValues[p.allParameters[4]][1]
+        disabled: True
+        values: p.ParameterValues[p.allParameters[4]][0]
+        on_press: p.allValuesAOO[4] = self.text
+        
+
+<RowAOO6>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[5]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: p.ParameterValues[p.allParameters[5]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[5]][0]
+        on_press: p.allValuesAOO[5] = self.text
+
+
+<RowAOO7>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[6]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: p.ParameterValues[p.allParameters[6]][1]
+        disabled: True
+        values: p.ParameterValues[p.allParameters[6]][0]
+        on_press: p.allValuesAOO[6] = self.text
         
     
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.75
+
+<RowAOO8>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[7]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: p.ParameterValues[p.allParameters[7]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[7]][0]
+        on_press: p.allValuesAOO[7] = self.text
+        
+
+<RowAOO9>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[8]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: p.ParameterValues[p.allParameters[8]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[8]][0]
+        on_press: p.allValuesAOO[8] = self.text
+        
+    
+
+<RowAOO10>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[9]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: p.ParameterValues[p.allParameters[9]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[9]][0]
+        on_press: p.allValuesAOO[9] = self.text
+        
+
+<RowAOO11>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[10]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: p.ParameterValues[p.allParameters[10]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[10]][0]
+        on_press: p.allValuesAOO[10] = self.text
+        
+
+<RowAOO12>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[11]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: p.ParameterValues[p.allParameters[11]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[11]][0]
+        on_press: p.allValuesAOO[11] = self.text
+        
+
+
+<RowAOO13>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[12]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: p.ParameterValues[p.allParameters[12]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[12]][0]
+        on_press: p.allValuesAOO[12] = self.text
+        
 
 <RowVOO1>:
     spacing: 50
@@ -155,22 +303,16 @@
 
 
     Label:
-        text: p.VOOParameters[0]
+        text: p.AOOParameters[0]
         size_hint_x: 1
         font_size: 15
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.VOOParameters[0]][1]
-        disabled: not CheckBox.active
-        values: p.ParameterValues[p.VOOParameters[0]][0]
-        
-    
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.75
+        text: p.ParameterValues[p.allParameters[0]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[0]][0]
+        on_press: p.allValuesVOO[0] = self.text
 
 <RowVOO2>:
     spacing: 50
@@ -178,22 +320,18 @@
 
 
     Label:
-        text: p.VOOParameters[1]
+        text: p.allParameters[1]
         size_hint_x: 1
         font_size: 15
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.VOOParameters[1]][1]
-        disabled: not CheckBox.active
-        values: p.ParameterValues[p.VOOParameters[1]][0]
+        text: p.ParameterValues[p.allParameters[1]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[1]][0]
+        on_press: p.allValuesVOO[1] = self.text
         
-    
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.75
+
 
 <RowVOO3>:
     spacing: 50
@@ -201,22 +339,17 @@
 
 
     Label:
-        text: p.VOOParameters[2]
+        text: p.allParameters[2]
         size_hint_x: 1
         font_size: 15
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.VOOParameters[2]][1]
-        disabled: not CheckBox.active
-        values: p.ParameterValues[p.VOOParameters[2]][0]
-        
-    
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.75
+        text: p.ParameterValues[p.allParameters[2]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[2]][0]
+        on_press: p.allValuesVOO[2] = self.text
+
 
 <RowVOO4>:
     spacing: 50
@@ -224,46 +357,194 @@
 
 
     Label:
-        text: p.VOOParameters[3]
+        text: p.allParameters[3]
         size_hint_x: 1
         font_size: 15
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.VOOParameters[3]][1]
-        disabled: not CheckBox.active
-        values: p.ParameterValues[p.VOOParameters[3]][0]
+        text: p.ParameterValues[p.allParameters[3]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[3]][0]
+        on_press: p.allValuesVOO[3] = self.text
+
+
+<RowVOO5>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[4]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: p.ParameterValues[p.allParameters[4]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[4]][0]
+        on_press: p.allValuesVOO[4] = self.text
+        
+
+<RowVOO6>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[5]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: p.ParameterValues[p.allParameters[5]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[5]][0]
+        on_press: p.allValuesVOO[5] = self.text
+
+<RowVOO7>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[6]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: p.ParameterValues[p.allParameters[6]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[6]][0]
+        on_press: p.allValuesVOO[6] = self.text
         
     
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.75
-    
+<RowVOO8>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[7]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: p.ParameterValues[p.allParameters[7]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[7]][0]
+        on_press: p.allValuesVOO[7] = self.text
+        
+
+<RowVOO9>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[8]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: p.ParameterValues[p.allParameters[8]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[8]][0]
+        on_press: p.allValuesVOO[8] = self.text
+        
+
+<RowVOO10>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[9]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: p.ParameterValues[p.allParameters[9]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[9]][0]
+        on_press: p.allValuesVOO[9] = self.text
+
+<RowVOO11>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[10]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: p.ParameterValues[p.allParameters[10]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[10]][0]
+        on_press: p.allValuesVOO[10] = self.text
+
+<RowVOO12>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[11]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: p.ParameterValues[p.allParameters[11]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[11]][0]
+        on_press: p.allValuesVOO[11] = self.text
+        
+
+<RowVOO13>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[12]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: p.ParameterValues[p.allParameters[12]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[12]][0]
+        on_press: p.allValuesVOO[12] = self.text
+        
+
+
 <RowAAI1>:
     spacing: 50
     size_hint_x: 1
 
 
     Label:
-        text: p.AAIParameters[0]
+        text: p.AOOParameters[0]
         size_hint_x: 1
         font_size: 15
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.AAIParameters[0]][1]
-        disabled: not CheckBox.active
-        values: p.ParameterValues[p.AAIParameters[0]][0]
-        
-    
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.75
-    
+        text: p.ParameterValues[p.allParameters[0]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[0]][0]
+        on_press: p.allValuesAAI[0] = self.text
 
 <RowAAI2>:
     spacing: 50
@@ -271,23 +552,17 @@
 
 
     Label:
-        text: p.AAIParameters[1]
+        text: p.allParameters[1]
         size_hint_x: 1
         font_size: 15
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.AAIParameters[1]][1]
-        disabled: not CheckBox.active
-        values: p.ParameterValues[p.AAIParameters[1]][0]
-        
-    
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.75
-    
+        text: p.ParameterValues[p.allParameters[1]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[1]][0]
+        on_press: p.allValuesAAI[1] = self.text
+
 
 <RowAAI3>:
     spacing: 50
@@ -295,23 +570,20 @@
 
 
     Label:
-        text: p.AAIParameters[2]
+        text: p.allParameters[2]
         size_hint_x: 1
         font_size: 15
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.AAIParameters[2]][1]
-        disabled: not CheckBox.active
-        values: p.ParameterValues[p.AAIParameters[2]][0]
+        text: p.ParameterValues[p.allParameters[2]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[2]][0]
+        on_press: p.allValuesAAI[2] = self.text
         
     
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.75
-    
+
+
 
 <RowAAI4>:
     spacing: 50
@@ -319,23 +591,19 @@
 
 
     Label:
-        text: p.AAIParameters[3]
+        text: p.allParameters[3]
         size_hint_x: 1
         font_size: 15
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.AAIParameters[3]][1]
-        disabled: not CheckBox.active
-        values: p.ParameterValues[p.AAIParameters[3]][0]
+        text: p.ParameterValues[p.allParameters[3]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[3]][0]
+        on_press: p.allValuesAAI[3] = self.text
         
     
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.75
-    
+
 
 <RowAAI5>:
     spacing: 50
@@ -343,22 +611,17 @@
 
 
     Label:
-        text: p.AAIParameters[4]
+        text: p.allParameters[4]
         size_hint_x: 1
         font_size: 15
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.AAIParameters[4]][1]
-        disabled: not CheckBox.active
-        values: p.ParameterValues[p.AAIParameters[4]][0]
+        text: p.ParameterValues[p.allParameters[4]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[4]][0]
+        on_press: p.allValuesAAI[4] = self.text
         
-    
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.75
     
 
 <RowAAI6>:
@@ -367,22 +630,17 @@
 
 
     Label:
-        text: p.AAIParameters[5]
+        text: p.allParameters[5]
         size_hint_x: 1
         font_size: 15
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.AAIParameters[5]][1]
-        disabled: not CheckBox.active
-        values: p.ParameterValues[p.AAIParameters[5]][0]
+        text: p.ParameterValues[p.allParameters[5]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[5]][0]
+        on_press: p.allValuesAAI[5] = self.text
         
-    
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.75
     
 
 <RowAAI7>:
@@ -391,45 +649,36 @@
 
 
     Label:
-        text: p.AAIParameters[6]
+        text: p.allParameters[6]
         size_hint_x: 1
         font_size: 15
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.AAIParameters[6]][1]
-        disabled: not CheckBox.active
-        values: p.ParameterValues[p.AAIParameters[6]][0]
+        text: p.ParameterValues[p.allParameters[6]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[6]][0]
+        on_press: p.allValuesAAI[6] = self.text
         
-    
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.75
     
 
 <RowAAI8>:
     spacing: 50
     size_hint_x: 1
 
+
     Label:
-        text: p.AAIParameters[7]
+        text: p.allParameters[7]
         size_hint_x: 1
         font_size: 15
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.AAIParameters[7]][1]
-        disabled: not CheckBox.active
-        values: p.ParameterValues[p.AAIParameters[7]][0]
+        text: p.ParameterValues[p.allParameters[7]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[7]][0]
+        on_press: p.allValuesAAI[7] = self.text
         
-    
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.75
     
 
 <RowAAI9>:
@@ -438,22 +687,94 @@
 
 
     Label:
-        text: p.AAIParameters[8]
+        text: p.allParameters[8]
         size_hint_x: 1
         font_size: 15
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.AAIParameters[8]][1]
-        disabled: not CheckBox.active
-        values: p.ParameterValues[p.AAIParameters[8]][0]
+        text: p.ParameterValues[p.allParameters[8]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[8]][0]
+        on_press: p.allValuesAAI[8] = self.text
         
     
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.75
+
+<RowAAI10>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[9]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: p.ParameterValues[p.allParameters[9]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[9]][0]
+        on_press: p.allValuesAAI[9] = self.text
+        
+    
+
+<RowAAI11>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[10]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: p.ParameterValues[p.allParameters[10]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[10]][0]
+        on_press: p.allValuesAAI[10] = self.text
+        
+    
+
+<RowAAI12>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[11]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: p.ParameterValues[p.allParameters[11]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[11]][0]
+        on_press: p.allValuesAAI[11] = self.text
+        
+    
+
+
+<RowAAI13>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[12]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: p.ParameterValues[p.allParameters[12]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[12]][0]
+        on_press: p.allValuesAAI[12] = self.text
+        
     
 
 
@@ -463,23 +784,17 @@
 
 
     Label:
-        text: p.VVIParameters[0]
+        text: p.AOOParameters[0]
         size_hint_x: 1
         font_size: 15
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.VVIParameters[0]][1]
-        disabled: not CheckBox.active
-        values: p.ParameterValues[p.VVIParameters[0]][0]
+        text: p.ParameterValues[p.allParameters[0]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[0]][0]
+        on_press: p.allValuesVVI[0] = self.text
         
-    
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.75
-    
 
 <RowVVI2>:
     spacing: 50
@@ -487,23 +802,19 @@
 
 
     Label:
-        text: p.VVIParameters[1]
+        text: p.allParameters[1]
         size_hint_x: 1
         font_size: 15
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.VVIParameters[1]][1]
-        disabled: not CheckBox.active
-        values: p.ParameterValues[p.VVIParameters[1]][0]
+        text: p.ParameterValues[p.allParameters[1]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[1]][0]
+        on_press: p.allValuesVVI[1] = self.text
         
     
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.75
-    
+
 
 <RowVVI3>:
     spacing: 50
@@ -511,23 +822,20 @@
 
 
     Label:
-        text: p.VVIParameters[2]
+        text: p.allParameters[2]
         size_hint_x: 1
         font_size: 15
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.VVIParameters[2]][1]
-        disabled: not CheckBox.active
-        values: p.ParameterValues[p.VVIParameters[2]][0]
+        text: p.ParameterValues[p.allParameters[2]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[2]][0]
+        on_press: p.allValuesVVI[2] = self.text
         
     
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.75
-    
+
+
 
 <RowVVI4>:
     spacing: 50
@@ -535,23 +843,19 @@
 
 
     Label:
-        text: p.VVIParameters[3]
+        text: p.allParameters[3]
         size_hint_x: 1
         font_size: 15
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.VVIParameters[3]][1]
-        disabled: not CheckBox.active
-        values: p.ParameterValues[p.VVIParameters[3]][0]
+        text: p.ParameterValues[p.allParameters[3]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[3]][0]
+        on_press: p.allValuesVVI[3] = self.text
         
     
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.75
-    
+
 
 <RowVVI5>:
     spacing: 50
@@ -559,21 +863,17 @@
 
 
     Label:
-        text: p.VVIParameters[4]
+        text: p.allParameters[4]
         size_hint_x: 1
         font_size: 15
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.VVIParameters[4]][1]
-        disabled: not CheckBox.active
-        values: p.ParameterValues[p.VVIParameters[4]][0]
+        text: p.ParameterValues[p.allParameters[4]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[4]][0]
+        on_press: p.allValuesVVI[4] = self.text
         
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.75
     
 
 <RowVVI6>:
@@ -582,22 +882,17 @@
 
 
     Label:
-        text: p.VVIParameters[5]
+        text: p.allParameters[5]
         size_hint_x: 1
         font_size: 15
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.VVIParameters[5]][1]
-        disabled: not CheckBox.active
-        values: p.ParameterValues[p.VVIParameters[5]][0]
+        text: p.ParameterValues[p.allParameters[5]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[5]][0]
+        on_press: p.allValuesVVI[5] = self.text
         
-    
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.75
     
 
 <RowVVI7>:
@@ -606,47 +901,133 @@
 
 
     Label:
-        text: p.VVIParameters[6]
+        text: p.allParameters[6]
         size_hint_x: 1
         font_size: 15
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.VVIParameters[6]][1]
-        disabled: not CheckBox.active
-        values: p.ParameterValues[p.VVIParameters[6]][0]
+        text: p.ParameterValues[p.allParameters[6]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[6]][0]
+        on_press: p.allValuesVVI[6] = self.text
         
-    
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.75
     
 
 <RowVVI8>:
     spacing: 50
     size_hint_x: 1
 
+
     Label:
-        text: p.VVIParameters[7]
+        text: p.allParameters[7]
         size_hint_x: 1
         font_size: 15
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.VVIParameters[7]][1]
-        disabled: not CheckBox.active
-        values: p.ParameterValues[p.VVIParameters[7]][0]
+        text: p.ParameterValues[p.allParameters[7]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[7]][0]
+        on_press: p.allValuesVVI[7] = self.text
         
     
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.75
-   
 
+<RowVVI9>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[8]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: p.ParameterValues[p.allParameters[8]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[8]][0]
+        on_press: p.allValuesVVI[8] = self.text
+        
+    
+
+<RowVVI10>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[9]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: p.ParameterValues[p.allParameters[9]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[9]][0]
+        on_press: p.allValuesVVI[9] = self.text
+        
+    
+
+<RowVVI11>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[10]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: p.ParameterValues[p.allParameters[10]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[10]][0]
+        on_press: p.allValuesVVI[10] = self.text
+        
+    
+
+<RowVVI12>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[11]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: p.ParameterValues[p.allParameters[11]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[11]][0]
+        on_press: p.allValuesVVI[11] = self.text
+        
+    
+
+
+<RowVVI13>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[12]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: p.ParameterValues[p.allParameters[12]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[12]][0]
+        on_press: p.allValuesVVI[12] = self.text
+        
+    
 
 
 <RowDOO1>:
@@ -655,23 +1036,18 @@
 
 
     Label:
-        text: p.DOOParameters[0]
+        text: p.AOOParameters[0]
         size_hint_x: 1
         font_size: 15
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.DOOParameters[0]][1]
-        disabled: not CheckBox.active
-        values: p.ParameterValues[p.DOOParameters[0]][0]
+        text: p.ParameterValues[p.allParameters[0]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[0]][0]
+        on_press: p.allValuesDOO[0] = self.text
         
-    
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.75
-    
+
 
 <RowDOO2>:
     spacing: 50
@@ -679,23 +1055,19 @@
 
 
     Label:
-        text: p.DOOParameters[1]
+        text: p.allParameters[1]
         size_hint_x: 1
         font_size: 15
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.DOOParameters[1]][1]
-        disabled: not CheckBox.active
-        values: p.ParameterValues[p.DOOParameters[1]][0]
+        text: p.ParameterValues[p.allParameters[1]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[1]][0]
+        on_press: p.allValuesDOO[1] = self.text
         
     
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.75
-    
+
 
 <RowDOO3>:
     spacing: 50
@@ -703,23 +1075,20 @@
 
 
     Label:
-        text: p.DOOParameters[2]
+        text: p.allParameters[2]
         size_hint_x: 1
         font_size: 15
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.DOOParameters[2]][1]
-        disabled: not CheckBox.active
-        values: p.ParameterValues[p.DOOParameters[2]][0]
+        text: p.ParameterValues[p.allParameters[2]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[2]][0]
+        on_press: p.allValuesDOO[2] = self.text
         
     
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.75
-    
+
+
 
 <RowDOO4>:
     spacing: 50
@@ -727,23 +1096,19 @@
 
 
     Label:
-        text: p.DOOParameters[3]
+        text: p.allParameters[3]
         size_hint_x: 1
         font_size: 15
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.DOOParameters[3]][1]
-        disabled: not CheckBox.active
-        values: p.ParameterValues[p.DOOParameters[3]][0]
+        text: p.ParameterValues[p.allParameters[3]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[3]][0]
+        on_press: p.allValuesDOO[3] = self.text
         
     
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.75
-    
+
 
 <RowDOO5>:
     spacing: 50
@@ -751,22 +1116,17 @@
 
 
     Label:
-        text: p.DOOParameters[4]
+        text: p.allParameters[4]
         size_hint_x: 1
         font_size: 15
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.DOOParameters[4]][1]
-        disabled: not CheckBox.active
-        values: p.ParameterValues[p.DOOParameters[4]][0]
+        text: p.ParameterValues[p.allParameters[4]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[4]][0]
+        on_press: p.allValuesDOO[4] = self.text
         
-    
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.75
     
 
 <RowDOO6>:
@@ -775,22 +1135,17 @@
 
 
     Label:
-        text: p.DOOParameters[5]
+        text: p.allParameters[5]
         size_hint_x: 1
         font_size: 15
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.DOOParameters[5]][1]
-        disabled: not CheckBox.active
-        values: p.ParameterValues[p.DOOParameters[5]][0]
+        text: p.ParameterValues[p.allParameters[5]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[5]][0]
+        on_press: p.allValuesDOO[5] = self.text
         
-    
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.75
     
 
 <RowDOO7>:
@@ -799,24 +1154,135 @@
 
 
     Label:
-        text: p.DOOParameters[6]
+        text: p.allParameters[6]
         size_hint_x: 1
         font_size: 15
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.DOOParameters[6]][1]
-        disabled: not CheckBox.active
-        values: p.ParameterValues[p.DOOParameters[6]][0]
+        text: p.ParameterValues[p.allParameters[6]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[6]][0]
+        on_press: p.allValuesDOO[6] = self.text
         
     
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.75
-    
+
+<RowDOO8>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[7]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: p.ParameterValues[p.allParameters[7]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[7]][0]
+        on_press: p.allValuesDOO[7] = self.text
         
+    
+
+<RowDOO9>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[8]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: p.ParameterValues[p.allParameters[8]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[8]][0]
+        on_press: p.allValuesDOO[8] = self.text
+        
+    
+
+<RowDOO10>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[9]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: p.ParameterValues[p.allParameters[9]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[9]][0]
+        on_press: p.allValuesDOO[9] = self.text
+        
+    
+
+<RowDOO11>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[10]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: p.ParameterValues[p.allParameters[10]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[10]][0]
+        on_press: p.allValuesDOO[10] = self.text
+        
+    
+
+<RowDOO12>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[11]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: p.ParameterValues[p.allParameters[11]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[11]][0]
+        on_press: p.allValuesDOO[11] = self.text
+        
+    
+
+
+<RowDOO13>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[12]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: p.ParameterValues[p.allParameters[12]][1]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[12]][0]
+        on_press: p.allValuesDOO[12] = self.text
+        
+    
+
+
 <Connection>:
     text: 'Device Connection'
     orientation: 'vertical'
@@ -847,7 +1313,6 @@
         background_color: (0,0.7,1,1) if root.showPacingModes() else (0.0, 1.0, 0.0, 1.0)
         halign: 'center'
         font_size: 18
-        # size_hint_y: 0.15
 
 	Button:
 		text: 'Logout'
@@ -855,7 +1320,7 @@
 		on_press: root.Logout()
 
 <statusBar>:
-    padding: 6
+    padding: 0
 
     Button:
 		text: ' CONNECTION SCREEN '
@@ -877,7 +1342,7 @@
 	Button:
 		text: 'SET ALL'
 		background_color: (0,0.75,0.25,1)
-		on_press: root.returnConnection()
+		on_press: root.setAll()
     
 <title>:
     Label:
@@ -889,11 +1354,5 @@
     Label:
         orientation:'horizontal'
         text: 'PARAMETER VALUES'
-        bold: True
-        font_size: 20
-
-    Label:
-        orientation:'horizontal'
-        text: 'ENABLE EDIT'
         bold: True
         font_size: 20
