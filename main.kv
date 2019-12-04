@@ -1,6 +1,7 @@
 #:import p Parameters
 #:import d DatabaseManipulation
 <Parameters>:
+    id: parameters
     do_default_tab: False
     
 
@@ -9,10 +10,28 @@
         text: 'AOO'
         on_press: app.currentMode = 'AOO'
         on_press: d.currentM = 'AOO'
+        on_press: app.SET = False
 
         TableAOO:
-            padding: 50, 50, 50, 50
+            id: tAOO
+            padding: 40, 0, 40, 0
             orientation: 'vertical'
+            
+            Label:
+                text: 'Rate Adaptability'
+                orientation: 'horizontal'
+
+            CheckBox:
+                id: cb 
+                active: False
+                on_press: 
+                    if self.active: app.currentMode = 'AOOR' 
+                    else: app.currentMode = 'AOO'
+                on_press: 
+                    if self.active: d.currentM = 'AOOR' 
+                    else: d.currentM = 'AOO'  
+                on_press: app.SET = False
+                                   
             
 
     
@@ -21,40 +40,101 @@
         text: 'VOO'
         on_press: app.currentMode = 'VOO'
         on_press: d.currentM = 'VOO'
+        on_press: app.SET = False
 
         TableVOO:
-            padding: 50, 50, 50, 50
+            padding: 40, 0, 40, 0
             orientation: 'vertical'
+
+            Label:
+                text: 'Rate Adaptability'
+                orientation: 'vertical'
+
+            CheckBox:
+                active: False
+                orientation:'vertical'
+                on_press: 
+                    if self.active: app.currentMode = 'VOOR' 
+                    else: app.currentMode = 'VOO'
+                on_press: 
+                    if self.active: d.currentM = 'VOOR' 
+                    else: d.currentM = 'VOO'  
+                on_press: app.SET = False
 
     TabbedPanelItem:
         id: AAI
         text: 'AAI'
         on_press: app.currentMode = 'AAI'
         on_press: d.currentM = 'AAI'
+        on_press: app.SET = False
 
         TableAAI:
-            padding: 50, 50, 50, 50
+            padding: 40, 0, 40, 0
             orientation: 'vertical'
+
+            Label:
+                text: 'Rate Adaptability'
+                orientation: 'horizontal'
+
+            CheckBox:
+                active: False
+                on_press: 
+                    if self.active: app.currentMode = 'AAIR' 
+                    else: app.currentMode = 'AAI'
+                on_press: 
+                    if self.active: d.currentM = 'AAIR' 
+                    else: d.currentM = 'AAI' 
+                on_press: app.SET = False
 
     TabbedPanelItem:
         id: VVI
         text: 'VVI'
         on_press: app.currentMode = 'VVI'
         on_press: d.currentM = 'VVI'
+        on_press: app.SET = False
 
         TableVVI:
-            padding: 50, 50, 50, 50
+            padding: 40, 0, 40, 0
             orientation: 'vertical'
+
+            Label:
+                text: 'Rate Adaptability'
+                orientation: 'horizontal'
+
+            CheckBox:
+                active: False
+                on_press: 
+                    if self.active: app.currentMode = 'VVIR' 
+                    else: app.currentMode = 'VVI'
+                on_press: 
+                    if self.active: d.currentM = 'VVIR' 
+                    else: d.currentM = 'VVI' 
+                on_press: app.SET = False
     
     TabbedPanelItem:
         id: DOO
         text: 'DOO'
         on_press: app.currentMode = 'DOO'
         on_press: d.currentM = 'DOO'
+        on_press: app.SET = False
 
         TableDOO:
-            padding: 50, 50, 50, 50
+            padding: 40, 0, 40, 0
             orientation: 'vertical'
+
+            Label:
+                text: 'Rate Adaptability'
+                orientation: 'horizontal'
+
+            CheckBox:
+                active: False
+                on_press: 
+                    if self.active: app.currentMode = 'DOOR' 
+                    else: app.currentMode = 'DOO'
+                on_press: 
+                    if self.active: d.currentM = 'DOOR' 
+                    else: d.currentM = 'DOO' 
+                on_press: app.SET = False
 
 		
 		
@@ -71,10 +151,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[0]][1]
+        text: d.activeValues[0]
         disabled: False
         values: p.ParameterValues[p.allParameters[0]][0]
-        on_press: p.allValuesAOO[0] = self.text
+        on_text: p.allValuesAOO[0] = self.text
+        on_text: app.SET = False
 
 
 <RowAOO2>:
@@ -89,10 +170,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[1]][1]
-        disabled: False
+        text: d.activeValues[1]
+        disabled: False if app.currentMode == 'AOOR' else True
         values: p.ParameterValues[p.allParameters[1]][0]
-        on_press: p.allValuesAOO[1] = self.text
+        on_text: p.allValuesAOO[1] = self.text
+        on_text: app.SET = False
 
 
 <RowAOO3>:
@@ -107,10 +189,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[2]][1]
+        text: d.activeValues[2]
         disabled: True
         values: p.ParameterValues[p.allParameters[2]][0]
-        on_press: p.allValuesAOO[2] = self.text
+        on_text: p.allValuesAOO[2] = self.text
+        on_text: app.SET = False
         
 
 
@@ -126,10 +209,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[3]][1]
+        text: d.activeValues[3]
         disabled: False
         values: p.ParameterValues[p.allParameters[3]][0]
-        on_press: p.allValuesAOO[3] = self.text
+        on_text: p.allValuesAOO[3] = self.text
+        on_text: app.SET = False
         
 
 <RowAOO5>:
@@ -144,10 +228,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[4]][1]
+        text: d.activeValues[4]
         disabled: True
         values: p.ParameterValues[p.allParameters[4]][0]
-        on_press: p.allValuesAOO[4] = self.text
+        on_text: p.allValuesAOO[4] = self.text
+        on_text: app.SET = False
         
 
 <RowAOO6>:
@@ -162,10 +247,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[5]][1]
+        text: d.activeValues[5]
         disabled: False
         values: p.ParameterValues[p.allParameters[5]][0]
-        on_press: p.allValuesAOO[5] = self.text
+        on_text: p.allValuesAOO[5] = self.text
+        on_text: app.SET = False
 
 
 <RowAOO7>:
@@ -180,10 +266,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[6]][1]
+        text: d.activeValues[6]
         disabled: True
         values: p.ParameterValues[p.allParameters[6]][0]
-        on_press: p.allValuesAOO[6] = self.text
+        on_text: p.allValuesAOO[6] = self.text
+        on_text: app.SET = False
         
     
 
@@ -199,10 +286,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[7]][1]
+        text: d.activeValues[7]
         disabled: False
         values: p.ParameterValues[p.allParameters[7]][0]
-        on_press: p.allValuesAOO[7] = self.text
+        on_text: p.allValuesAOO[7] = self.text
+        on_text: app.SET = False
         
 
 <RowAOO9>:
@@ -217,10 +305,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[8]][1]
+        text: d.activeValues[8]
         disabled: False
         values: p.ParameterValues[p.allParameters[8]][0]
-        on_press: p.allValuesAOO[8] = self.text
+        on_text: p.allValuesAOO[8] = self.text
+        on_text: app.SET = False
         
     
 
@@ -236,10 +325,13 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[9]][1]
-        disabled: False
+        text: d.activeValues[9]
+        disabled: False if app.currentMode == 'AOOR' else True
         values: p.ParameterValues[p.allParameters[9]][0]
-        on_press: p.allValuesAOO[9] = self.text
+        on_text: p.allValuesAOO[9] = self.text
+        on_text: app.SET = False
+
+        
         
 
 <RowAOO11>:
@@ -254,10 +346,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[10]][1]
-        disabled: False
+        text: d.activeValues[10]
+        disabled: False if app.currentMode == 'AOOR' else True
         values: p.ParameterValues[p.allParameters[10]][0]
-        on_press: p.allValuesAOO[10] = self.text
+        on_text: p.allValuesAOO[10] = self.text
+        on_text: app.SET = False
         
 
 <RowAOO12>:
@@ -272,10 +365,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[11]][1]
-        disabled: False
+        text: d.activeValues[11]
+        disabled: False if app.currentMode == 'AOOR' else True
         values: p.ParameterValues[p.allParameters[11]][0]
-        on_press: p.allValuesAOO[11] = self.text
+        on_text: p.allValuesAOO[11] = self.text
+        on_text: app.SET = False
         
 
 
@@ -291,10 +385,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[12]][1]
-        disabled: False
+        text: d.activeValues[12]
+        disabled: False if app.currentMode == 'AOOR' else True
         values: p.ParameterValues[p.allParameters[12]][0]
-        on_press: p.allValuesAOO[12] = self.text
+        on_text: p.allValuesAOO[12] = self.text
+        on_text: app.SET = False
         
 
 <RowVOO1>:
@@ -309,10 +404,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[0]][1]
+        text: d.activeValues[0]
         disabled: False
         values: p.ParameterValues[p.allParameters[0]][0]
-        on_press: p.allValuesVOO[0] = self.text
+        on_text: p.allValuesVOO[0] = self.text
+        on_text: app.SET = False
 
 <RowVOO2>:
     spacing: 50
@@ -326,10 +422,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[1]][1]
-        disabled: False
+        text: d.activeValues[1]
+        disabled: False if app.currentMode == 'VOOR' else True
         values: p.ParameterValues[p.allParameters[1]][0]
-        on_press: p.allValuesVOO[1] = self.text
+        on_text: p.allValuesVOO[1] = self.text
+        on_text: app.SET = False
         
 
 
@@ -345,10 +442,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[2]][1]
-        disabled: False
+        text: d.activeValues[2]
+        disabled: True
         values: p.ParameterValues[p.allParameters[2]][0]
-        on_press: p.allValuesVOO[2] = self.text
+        on_text: p.allValuesVOO[2] = self.text
+        on_text: app.SET = False
 
 
 <RowVOO4>:
@@ -363,10 +461,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[3]][1]
-        disabled: False
+        text: d.activeValues[3]
+        disabled: True
         values: p.ParameterValues[p.allParameters[3]][0]
-        on_press: p.allValuesVOO[3] = self.text
+        on_text: p.allValuesVOO[3] = self.text
+        on_text: app.SET = False
 
 
 <RowVOO5>:
@@ -381,10 +480,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[4]][1]
+        text: d.activeValues[4]
         disabled: False
         values: p.ParameterValues[p.allParameters[4]][0]
-        on_press: p.allValuesVOO[4] = self.text
+        on_text: p.allValuesVOO[4] = self.text
+        on_text: app.SET = False
         
 
 <RowVOO6>:
@@ -399,10 +499,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[5]][1]
-        disabled: False
+        text: d.activeValues[5]
+        disabled: True
         values: p.ParameterValues[p.allParameters[5]][0]
-        on_press: p.allValuesVOO[5] = self.text
+        on_text: p.allValuesVOO[5] = self.text
+        on_text: app.SET = False
 
 <RowVOO7>:
     spacing: 50
@@ -416,10 +517,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[6]][1]
+        text: d.activeValues[6]
         disabled: False
         values: p.ParameterValues[p.allParameters[6]][0]
-        on_press: p.allValuesVOO[6] = self.text
+        on_text: p.allValuesVOO[6] = self.text
+        on_text: app.SET = False
         
     
 <RowVOO8>:
@@ -434,10 +536,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[7]][1]
+        text: d.activeValues[7]
         disabled: False
         values: p.ParameterValues[p.allParameters[7]][0]
-        on_press: p.allValuesVOO[7] = self.text
+        on_text: p.allValuesVOO[7] = self.text
+        on_text: app.SET = False
         
 
 <RowVOO9>:
@@ -452,10 +555,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[8]][1]
-        disabled: False
+        text: d.activeValues[8]
+        disabled: True
         values: p.ParameterValues[p.allParameters[8]][0]
-        on_press: p.allValuesVOO[8] = self.text
+        on_text: p.allValuesVOO[8] = self.text
+        on_text: app.SET = False
         
 
 <RowVOO10>:
@@ -470,10 +574,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[9]][1]
-        disabled: False
+        text: d.activeValues[9]
+        disabled: False if app.currentMode == 'VOOR' else True
         values: p.ParameterValues[p.allParameters[9]][0]
-        on_press: p.allValuesVOO[9] = self.text
+        on_text: p.allValuesVOO[9] = self.text
+        on_text: app.SET = False
 
 <RowVOO11>:
     spacing: 50
@@ -487,10 +592,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[10]][1]
-        disabled: False
+        text: d.activeValues[10]
+        disabled: False if app.currentMode == 'VOOR' else True
         values: p.ParameterValues[p.allParameters[10]][0]
-        on_press: p.allValuesVOO[10] = self.text
+        on_text: p.allValuesVOO[10] = self.text
+        on_text: app.SET = False
 
 <RowVOO12>:
     spacing: 50
@@ -504,10 +610,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[11]][1]
-        disabled: False
+        text: d.activeValues[11]
+        disabled: False if app.currentMode == 'VOOR' else True
         values: p.ParameterValues[p.allParameters[11]][0]
-        on_press: p.allValuesVOO[11] = self.text
+        on_text: p.allValuesVOO[11] = self.text
+        on_text: app.SET = False
         
 
 <RowVOO13>:
@@ -522,10 +629,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[12]][1]
-        disabled: False
+        text: d.activeValues[12]
+        disabled: False if app.currentMode == 'VOOR' else True
         values: p.ParameterValues[p.allParameters[12]][0]
-        on_press: p.allValuesVOO[12] = self.text
+        on_text: p.allValuesVOO[12] = self.text
+        on_text: app.SET = False
         
 
 
@@ -541,10 +649,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[0]][1]
+        text: d.activeValues[0]
         disabled: False
         values: p.ParameterValues[p.allParameters[0]][0]
-        on_press: p.allValuesAAI[0] = self.text
+        on_text: p.allValuesAAI[0] = self.text
+        on_text: app.SET = False
 
 <RowAAI2>:
     spacing: 50
@@ -558,10 +667,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[1]][1]
-        disabled: False
+        text: d.activeValues[1]
+        disabled: False if app.currentMode == 'AAIR' else True
         values: p.ParameterValues[p.allParameters[1]][0]
-        on_press: p.allValuesAAI[1] = self.text
+        on_text: p.allValuesAAI[1] = self.text
+        on_text: app.SET = False
 
 
 <RowAAI3>:
@@ -576,10 +686,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[2]][1]
-        disabled: False
+        text: d.activeValues[2]
+        disabled: True
         values: p.ParameterValues[p.allParameters[2]][0]
-        on_press: p.allValuesAAI[2] = self.text
+        on_text: p.allValuesAAI[2] = self.text
+        on_text: app.SET = False
         
     
 
@@ -597,10 +708,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[3]][1]
+        text: d.activeValues[3]
         disabled: False
         values: p.ParameterValues[p.allParameters[3]][0]
-        on_press: p.allValuesAAI[3] = self.text
+        on_text: p.allValuesAAI[3] = self.text
+        on_text: app.SET = False
         
     
 
@@ -617,10 +729,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[4]][1]
-        disabled: False
+        text: d.activeValues[4]
+        disabled:True
         values: p.ParameterValues[p.allParameters[4]][0]
-        on_press: p.allValuesAAI[4] = self.text
+        on_text: p.allValuesAAI[4] = self.text
+        on_text: app.SET = False
         
     
 
@@ -636,10 +749,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[5]][1]
+        text: d.activeValues[5]
         disabled: False
         values: p.ParameterValues[p.allParameters[5]][0]
-        on_press: p.allValuesAAI[5] = self.text
+        on_text: p.allValuesAAI[5] = self.text
+        on_text: app.SET = False
         
     
 
@@ -655,10 +769,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[6]][1]
-        disabled: False
+        text: d.activeValues[6]
+        disabled: True
         values: p.ParameterValues[p.allParameters[6]][0]
-        on_press: p.allValuesAAI[6] = self.text
+        on_text: p.allValuesAAI[6] = self.text
+        on_text: app.SET = False
         
     
 
@@ -674,10 +789,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[7]][1]
-        disabled: False
+        text: d.activeValues[7]
+        disabled: True
         values: p.ParameterValues[p.allParameters[7]][0]
-        on_press: p.allValuesAAI[7] = self.text
+        on_text: p.allValuesAAI[7] = self.text
+        on_text: app.SET = False
         
     
 
@@ -693,10 +809,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[8]][1]
+        text: d.activeValues[8]
         disabled: False
         values: p.ParameterValues[p.allParameters[8]][0]
-        on_press: p.allValuesAAI[8] = self.text
+        on_text: p.allValuesAAI[8] = self.text
+        on_text: app.SET = False
         
     
 
@@ -712,10 +829,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[9]][1]
-        disabled: False
+        text: d.activeValues[9]
+        disabled: False if app.currentMode == 'AAIR' else True
         values: p.ParameterValues[p.allParameters[9]][0]
-        on_press: p.allValuesAAI[9] = self.text
+        on_text: p.allValuesAAI[9] = self.text
+        on_text: app.SET = False
         
     
 
@@ -731,10 +849,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[10]][1]
-        disabled: False
+        text: d.activeValues[10]
+        disabled: False if app.currentMode == 'AAIR' else True
         values: p.ParameterValues[p.allParameters[10]][0]
-        on_press: p.allValuesAAI[10] = self.text
+        on_text: p.allValuesAAI[10] = self.text
+        on_text: app.SET = False
         
     
 
@@ -750,10 +869,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[11]][1]
-        disabled: False
+        text: d.activeValues[11]
+        disabled: False if app.currentMode == 'AAIR' else True
         values: p.ParameterValues[p.allParameters[11]][0]
-        on_press: p.allValuesAAI[11] = self.text
+        on_text: p.allValuesAAI[11] = self.text
+        on_text: app.SET = False
         
     
 
@@ -770,10 +890,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[12]][1]
-        disabled: False
+        text: d.activeValues[12]
+        disabled: False if app.currentMode == 'AAIR' else True
         values: p.ParameterValues[p.allParameters[12]][0]
-        on_press: p.allValuesAAI[12] = self.text
+        on_text: p.allValuesAAI[12] = self.text
+        on_text: app.SET = False
         
     
 
@@ -790,10 +911,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[0]][1]
+        text: d.activeValues[0]
         disabled: False
         values: p.ParameterValues[p.allParameters[0]][0]
-        on_press: p.allValuesVVI[0] = self.text
+        on_text: p.allValuesVVI[0] = self.text
+        on_text: app.SET = False
         
 
 <RowVVI2>:
@@ -808,11 +930,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[1]][1]
-        disabled: False
+        text: d.activeValues[1]
+        disabled: False if app.currentMode == 'VVIR' else True
         values: p.ParameterValues[p.allParameters[1]][0]
-        on_press: p.allValuesVVI[1] = self.text
-        
+        on_text: p.allValuesVVI[1] = self.text
+        on_text: app.SET = False        
     
 
 
@@ -828,11 +950,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[2]][1]
-        disabled: False
+        text: d.activeValues[2]
+        disabled: True
         values: p.ParameterValues[p.allParameters[2]][0]
-        on_press: p.allValuesVVI[2] = self.text
-        
+        on_text: p.allValuesVVI[2] = self.text
+        on_text: app.SET = False        
     
 
 
@@ -849,10 +971,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[3]][1]
-        disabled: False
+        text: d.activeValues[3]
+        disabled: True
         values: p.ParameterValues[p.allParameters[3]][0]
-        on_press: p.allValuesVVI[3] = self.text
+        on_text: p.allValuesVVI[3] = self.text
+        on_text: app.SET = False
         
     
 
@@ -869,10 +992,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[4]][1]
+        text: d.activeValues[4]
         disabled: False
         values: p.ParameterValues[p.allParameters[4]][0]
-        on_press: p.allValuesVVI[4] = self.text
+        on_text: p.allValuesVVI[4] = self.text
+        on_text: app.SET = False
         
     
 
@@ -888,10 +1012,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[5]][1]
-        disabled: False
+        text: d.activeValues[5]
+        disabled: True
         values: p.ParameterValues[p.allParameters[5]][0]
-        on_press: p.allValuesVVI[5] = self.text
+        on_text: p.allValuesVVI[5] = self.text
+        on_text: app.SET = False
         
     
 
@@ -907,10 +1032,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[6]][1]
+        text: d.activeValues[6]
         disabled: False
         values: p.ParameterValues[p.allParameters[6]][0]
-        on_press: p.allValuesVVI[6] = self.text
+        on_text: p.allValuesVVI[6] = self.text
+        on_text: app.SET = False
         
     
 
@@ -926,10 +1052,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[7]][1]
+        text: d.activeValues[7]
         disabled: False
         values: p.ParameterValues[p.allParameters[7]][0]
-        on_press: p.allValuesVVI[7] = self.text
+        on_text: p.allValuesVVI[7] = self.text
+        on_text: app.SET = False
         
     
 
@@ -945,10 +1072,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[8]][1]
-        disabled: False
+        text: d.activeValues[8]
+        disabled: True
         values: p.ParameterValues[p.allParameters[8]][0]
-        on_press: p.allValuesVVI[8] = self.text
+        on_text: p.allValuesVVI[8] = self.text
+        on_text: app.SET = False
         
     
 
@@ -964,10 +1092,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[9]][1]
-        disabled: False
+        text: d.activeValues[9]
+        disabled: False if app.currentMode == 'VVIR' else True
         values: p.ParameterValues[p.allParameters[9]][0]
-        on_press: p.allValuesVVI[9] = self.text
+        on_text: p.allValuesVVI[9] = self.text
+        on_text: app.SET = False
         
     
 
@@ -983,10 +1112,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[10]][1]
-        disabled: False
+        text: d.activeValues[10]
+        disabled: False if app.currentMode == 'VVIR' else True
         values: p.ParameterValues[p.allParameters[10]][0]
-        on_press: p.allValuesVVI[10] = self.text
+        on_text: p.allValuesVVI[10] = self.text
+        on_text: app.SET = False
         
     
 
@@ -1002,10 +1132,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[11]][1]
-        disabled: False
+        text: d.activeValues[11]
+        disabled: False if app.currentMode == 'VVIR' else True
         values: p.ParameterValues[p.allParameters[11]][0]
-        on_press: p.allValuesVVI[11] = self.text
+        on_text: p.allValuesVVI[11] = self.text
+        on_text: app.SET = False
         
     
 
@@ -1022,10 +1153,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[12]][1]
-        disabled: False
+        text: d.activeValues[12]
+        disabled: False if app.currentMode == 'VVIR' else True
         values: p.ParameterValues[p.allParameters[12]][0]
-        on_press: p.allValuesVVI[12] = self.text
+        on_text: p.allValuesVVI[12] = self.text
+        on_text: app.SET = False
         
     
 
@@ -1042,10 +1174,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[0]][1]
+        text: d.activeValues[0]
         disabled: False
         values: p.ParameterValues[p.allParameters[0]][0]
-        on_press: p.allValuesDOO[0] = self.text
+        on_text: p.allValuesDOO[0] = self.text
+        on_text: app.SET = False
         
 
 
@@ -1061,10 +1194,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[1]][1]
-        disabled: False
+        text: d.activeValues[1]
+        disabled: False if app.currentMode == 'DOOR' else True
         values: p.ParameterValues[p.allParameters[1]][0]
-        on_press: p.allValuesDOO[1] = self.text
+        on_text: p.allValuesDOO[1] = self.text
+        on_text: app.SET = False
         
     
 
@@ -1081,10 +1215,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[2]][1]
+        text: d.activeValues[2]
         disabled: False
         values: p.ParameterValues[p.allParameters[2]][0]
-        on_press: p.allValuesDOO[2] = self.text
+        on_text: p.allValuesDOO[2] = self.text
+        on_text: app.SET = False
         
     
 
@@ -1102,11 +1237,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[3]][1]
+        text: d.activeValues[3]
         disabled: False
         values: p.ParameterValues[p.allParameters[3]][0]
-        on_press: p.allValuesDOO[3] = self.text
-        
+        on_text: p.allValuesDOO[3] = self.text
+        on_text: app.SET = False
     
 
 
@@ -1122,10 +1257,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[4]][1]
+        text: d.activeValues[4]
         disabled: False
         values: p.ParameterValues[p.allParameters[4]][0]
-        on_press: p.allValuesDOO[4] = self.text
+        on_text: p.allValuesDOO[4] = self.text
+        on_text: app.SET = False
         
     
 
@@ -1141,10 +1277,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[5]][1]
+        text: d.activeValues[5]
         disabled: False
         values: p.ParameterValues[p.allParameters[5]][0]
-        on_press: p.allValuesDOO[5] = self.text
+        on_text: p.allValuesDOO[5] = self.text
+        on_text: app.SET = False
         
     
 
@@ -1160,10 +1297,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[6]][1]
+        text: d.activeValues[6]
         disabled: False
         values: p.ParameterValues[p.allParameters[6]][0]
-        on_press: p.allValuesDOO[6] = self.text
+        on_text: p.allValuesDOO[6] = self.text
+        on_text: app.SET = False
         
     
 
@@ -1179,10 +1317,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[7]][1]
-        disabled: False
+        text: d.activeValues[7]
+        disabled: True
         values: p.ParameterValues[p.allParameters[7]][0]
-        on_press: p.allValuesDOO[7] = self.text
+        on_text: p.allValuesDOO[7] = self.text
+        on_text: app.SET = False
         
     
 
@@ -1198,10 +1337,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[8]][1]
-        disabled: False
+        text: d.activeValues[8]
+        disabled: True
         values: p.ParameterValues[p.allParameters[8]][0]
-        on_press: p.allValuesDOO[8] = self.text
+        on_text: p.allValuesDOO[8] = self.text
+        on_text: app.SET = False
         
     
 
@@ -1217,11 +1357,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[9]][1]
-        disabled: False
+        text: d.activeValues[9]
+        disabled: False if app.currentMode == 'DOOR' else True
         values: p.ParameterValues[p.allParameters[9]][0]
-        on_press: p.allValuesDOO[9] = self.text
-        
+        on_text: p.allValuesDOO[9] = self.text
+        on_text: app.SET = False
     
 
 <RowDOO11>:
@@ -1236,10 +1376,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[10]][1]
-        disabled: False
+        text: d.activeValues[10]
+        disabled: False if app.currentMode == 'DOOR' else True
         values: p.ParameterValues[p.allParameters[10]][0]
-        on_press: p.allValuesDOO[10] = self.text
+        on_text: p.allValuesDOO[10] = self.text
+        on_text: app.SET = False
         
     
 
@@ -1255,10 +1396,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[11]][1]
-        disabled: False
+        text: d.activeValues[11]
+        disabled: False if app.currentMode == 'DOOR' else True
         values: p.ParameterValues[p.allParameters[11]][0]
-        on_press: p.allValuesDOO[11] = self.text
+        on_text: p.allValuesDOO[11] = self.text
+        on_text: app.SET = False
         
     
 
@@ -1275,10 +1417,11 @@
 
     Spinner:       
         id: value
-        text: p.ParameterValues[p.allParameters[12]][1]
-        disabled: False
+        text: d.activeValues[12]
+        disabled: False if app.currentMode == 'DOOR' else True
         values: p.ParameterValues[p.allParameters[12]][0]
-        on_press: p.allValuesDOO[12] = self.text
+        on_text: p.allValuesDOO[12] = self.text
+        on_text: app.SET = False
         
     
 
@@ -1290,7 +1433,7 @@
     
     Label:
         font_size: 20
-        text: '   Connected Device: \n\n <Device Identifier here>'
+        text: '   Connected User: \n\n '
         bold: True
         orientation: 'horizontal'
         padding: 0,0
@@ -1320,29 +1463,35 @@
 		on_press: root.Logout()
 
 <statusBar>:
-    padding: 0
+    id: status
 
     Button:
 		text: ' CONNECTION SCREEN '
 		background_color: (0.75,0,0,1)
 		on_press: root.returnConnection()
-
-	# Label:
-    #     padding: 5,0
-	# 	text:' Connected Device:\n<Device Identifier here>'
     
     Label:
 		text: 'Current Mode:\n' + app.currentMode
         color: (1,0,0.1,0.8)
 		
 	Label:
-		text: 'Status:\n Connected'
+		text: 'Status:\n CONNECTED'
 		color: (0,1,0.5,1)
+    
+    Label:
+        id: set
+		text: 'Mode & Parameters: \nNOT SET' if not app.SET else 'Mode & Parameters: \nSET'
+        active: False
+		color: (0.94,0.78,0.04,1)
 	
 	Button:
+        id: TB
 		text: 'SET ALL'
 		background_color: (0,0.75,0.25,1)
 		on_press: root.setAll()
+        on_press: app.SET = True
+        
+        
     
 <title>:
     Label:
