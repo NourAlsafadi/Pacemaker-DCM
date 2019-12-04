@@ -1,6 +1,6 @@
 from openpyxl import load_workbook
 import TextFileManipulation
-import Parameters
+import Parameters 
 
 
 book = load_workbook(filename = 'database.xlsx')
@@ -9,17 +9,20 @@ USERS = book.get_sheet_by_name('USERS')
 PARAMETERS = book.get_sheet_by_name('PARAMETERS')
 
 
-numUsers = 2
 activeUser = ''
 currentM = 'AOO'
+activeValues = [ Parameters.ParameterValues['Lower Rate Limit'][1], Parameters.ParameterValues['Maximum Rate Sensor'][1],  Parameters.ParameterValues['Fixed AV Delay'][1],  Parameters.ParameterValues['Atrial Amplitude'][1], Parameters.ParameterValues['Ventricular Amplitude'][1], Parameters.ParameterValues['Atrial Pulse Width'][1], Parameters.ParameterValues['Ventricular Pulse Width'][1],  Parameters.ParameterValues['VRP'][1],  Parameters.ParameterValues['ARP'][1],  Parameters.ParameterValues['Activity Threshold'][1],  Parameters.ParameterValues['Reaction Time'][1]	, Parameters.ParameterValues['Response Factor'][1],	 Parameters.ParameterValues['Recovery Time'][1]]
 
 def registerUser(username,password):
     
-    global numUsers
-    USERS['B'+ str(numUsers)] = username
-    USERS['C'+ str(numUsers)] = password
+    i=1
+    for row in USERS.values:
+        if(row[1] == None):
+            break
+        i += 1
     
-    numUsers += 1
+    USERS['B'+ str(i)] = username
+    USERS['C'+ str(i)] = password
 
     book.save('database.xlsx')
 
@@ -31,6 +34,7 @@ def getUserID(username):
         if(row[1] == activeUser):
             return i
         i += 1
+    return False
     
 
 def setParameters():
@@ -50,6 +54,16 @@ def setParameters():
     
     book.save('database.xlsx')
     return
+
+def getParameters(AU):
+    
+    if(getUserID(activeUser) == False):
+        return []
+
+    data = []
+    for i in range(13):
+        data.append(PARAMETERS[str(chr(ord('C') + i)) + str(getUserID(AU)) ])
+    return data
 
 
 def signalSerial():

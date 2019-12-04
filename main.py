@@ -70,6 +70,7 @@ class LoginScreen(FloatLayout):
 
         self.noMatchPassword=Label(text='The password does not match',size_hint=[.4,.05],pos=[250,250],color=[1,1,1,0])
         self.add_widget(self.noMatchPassword)
+        
 
         self.submitButton=Button(text='Login',size_hint=[.10,.05],pos=[350,200])
         self.submitButton.bind(on_press=self.submitPress)
@@ -89,7 +90,10 @@ class LoginScreen(FloatLayout):
             if UserPassCheck(username,password) and username!="":
                 self.wrongPassword.color=[1,1,1,0]
                 DatabaseManipulation.activeUser = username
-                runtimeApp.screen_manager.current='Connection'
+                
+                DatabaseManipulation.activeValues = DatabaseManipulation.getParameters(username)
+
+                runtimeApp.screen_manager.current ='Connection'
             else:
                 self.wrongPassword.color=[1,1,1,1]
             
@@ -526,6 +530,7 @@ class Parameters(TabbedPanel):
 #app (screen_manager)
 class PacemakerApp(App):
     currentMode = StringProperty('AOO')
+    SET = ObjectProperty(False)
 
     def build(self):
         self.screen_manager=ScreenManager()
