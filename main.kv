@@ -1,5 +1,7 @@
-#
+#:import p Parameters
+#:import d DatabaseManipulation
 <Parameters>:
+    id: parameters
     do_default_tab: False
     
 
@@ -7,175 +9,1423 @@
         id: AOO
         text: 'AOO'
         on_press: app.currentMode = 'AOO'
+        on_press: d.currentM = 'AOO'
+        on_press: app.SET = False
 
         TableAOO:
-            padding: 50, 50, 50, 50
+            id: tAOO
+            padding: 40, 0, 40, 0
             orientation: 'vertical'
+            
+            Label:
+                text: 'Rate Adaptability'
+                orientation: 'horizontal'
+
+            CheckBox:
+                id: cb 
+                active: False
+                on_press: 
+                    if self.active: app.currentMode = 'AOOR' 
+                    else: app.currentMode = 'AOO'
+                on_press: 
+                    if self.active: d.currentM = 'AOOR' 
+                    else: d.currentM = 'AOO'  
+                on_press: app.SET = False
+                                   
+            
 
     
     TabbedPanelItem:
         id: VOO
         text: 'VOO'
         on_press: app.currentMode = 'VOO'
+        on_press: d.currentM = 'VOO'
+        on_press: app.SET = False
 
         TableVOO:
-            padding: 50, 50, 50, 50
+            padding: 40, 0, 40, 0
             orientation: 'vertical'
+
+            Label:
+                text: 'Rate Adaptability'
+                orientation: 'vertical'
+
+            CheckBox:
+                active: False
+                orientation:'vertical'
+                on_press: 
+                    if self.active: app.currentMode = 'VOOR' 
+                    else: app.currentMode = 'VOO'
+                on_press: 
+                    if self.active: d.currentM = 'VOOR' 
+                    else: d.currentM = 'VOO'  
+                on_press: app.SET = False
 
     TabbedPanelItem:
         id: AAI
         text: 'AAI'
         on_press: app.currentMode = 'AAI'
+        on_press: d.currentM = 'AAI'
+        on_press: app.SET = False
 
         TableAAI:
-            padding: 50, 50, 50, 50
+            padding: 40, 0, 40, 0
             orientation: 'vertical'
+
+            Label:
+                text: 'Rate Adaptability'
+                orientation: 'horizontal'
+
+            CheckBox:
+                active: False
+                on_press: 
+                    if self.active: app.currentMode = 'AAIR' 
+                    else: app.currentMode = 'AAI'
+                on_press: 
+                    if self.active: d.currentM = 'AAIR' 
+                    else: d.currentM = 'AAI' 
+                on_press: app.SET = False
 
     TabbedPanelItem:
         id: VVI
         text: 'VVI'
         on_press: app.currentMode = 'VVI'
+        on_press: d.currentM = 'VVI'
+        on_press: app.SET = False
 
         TableVVI:
-            padding: 50, 50, 50, 50
+            padding: 40, 0, 40, 0
             orientation: 'vertical'
+
+            Label:
+                text: 'Rate Adaptability'
+                orientation: 'horizontal'
+
+            CheckBox:
+                active: False
+                on_press: 
+                    if self.active: app.currentMode = 'VVIR' 
+                    else: app.currentMode = 'VVI'
+                on_press: 
+                    if self.active: d.currentM = 'VVIR' 
+                    else: d.currentM = 'VVI' 
+                on_press: app.SET = False
     
     TabbedPanelItem:
         id: DOO
         text: 'DOO'
         on_press: app.currentMode = 'DOO'
+        on_press: d.currentM = 'DOO'
+        on_press: app.SET = False
 
         TableDOO:
-            padding: 50, 50, 50, 50
+            padding: 40, 0, 40, 0
             orientation: 'vertical'
 
+            Label:
+                text: 'Rate Adaptability'
+                orientation: 'horizontal'
+
+            CheckBox:
+                active: False
+                on_press: 
+                    if self.active: app.currentMode = 'DOOR' 
+                    else: app.currentMode = 'DOO'
+                on_press: 
+                    if self.active: d.currentM = 'DOOR' 
+                    else: d.currentM = 'DOO' 
+                on_press: app.SET = False
+
 		
 		
 
-<RowAOO>:
+<RowAOO1>:
     spacing: 50
     size_hint_x: 1
-    value: value
-    name: name
+
 
     Label:
-        id: name
-        text: root.txt
+        text: p.AOOParameters[0]
         size_hint_x: 1
         font_size: 15
 
     Spinner:       
         id: value
-        text: '1'#root.getNominal()
-        disabled: not CheckBox.active
-        values: '1' #root.getValues()
-    
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.75
+        text: d.activeValues[0]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[0]][0]
+        on_text: p.allValuesAOO[0] = self.text
+        on_text: app.SET = False
 
-<RowVOO>:
+
+<RowAOO2>:
     spacing: 50
     size_hint_x: 1
-    value: value
-    name: name
+
 
     Label:
-        id: name
-        text: root.txt
+        text: p.allParameters[1]
         size_hint_x: 1
         font_size: 15
 
     Spinner:       
         id: value
-        text: '1'#root.getNominal()
-        disabled: not CheckBox.active
-        values: '1' #root.getValues()
-    
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.75
-    
-<RowAAI>:
+        text: d.activeValues[1]
+        disabled: False if app.currentMode == 'AOOR' else True
+        values: p.ParameterValues[p.allParameters[1]][0]
+        on_text: p.allValuesAOO[1] = self.text
+        on_text: app.SET = False
+
+
+<RowAOO3>:
     spacing: 50
     size_hint_x: 1
-    value: value
-    name: name
+
 
     Label:
-        id: name
-        text: root.txt
+        text: p.allParameters[2]
         size_hint_x: 1
         font_size: 15
 
     Spinner:       
         id: value
-        text: '1'#root.getNominal()
-        disabled: not CheckBox.active
-        values: '1' #root.getValues()
-    
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.75
-    
+        text: d.activeValues[2]
+        disabled: True
+        values: p.ParameterValues[p.allParameters[2]][0]
+        on_text: p.allValuesAOO[2] = self.text
+        on_text: app.SET = False
+        
 
-<RowVVI>:
+
+<RowAOO4>:
     spacing: 50
     size_hint_x: 1
-    value: value
-    name: name
+
 
     Label:
-        id: name
-        text: root.txt
+        text: p.allParameters[3]
         size_hint_x: 1
         font_size: 15
 
     Spinner:       
         id: value
-        text: '1'#root.getNominal()
-        disabled: not CheckBox.active
-        values: '1' #root.getValues()
-    
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.75
-    
+        text: d.activeValues[3]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[3]][0]
+        on_text: p.allValuesAOO[3] = self.text
+        on_text: app.SET = False
+        
 
-
-<RowDOO>:
+<RowAOO5>:
     spacing: 50
     size_hint_x: 1
-    value: value
-    name: name
+
 
     Label:
-        id: name
-        text: root.txt
+        text: p.allParameters[4]
         size_hint_x: 1
         font_size: 15
 
     Spinner:       
         id: value
-        text: '1'#root.getNominal()
-        disabled: not CheckBox.active
-        values: '1' #root.getValues()
+        text: d.activeValues[4]
+        disabled: True
+        values: p.ParameterValues[p.allParameters[4]][0]
+        on_text: p.allValuesAOO[4] = self.text
+        on_text: app.SET = False
+        
+
+<RowAOO6>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[5]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[5]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[5]][0]
+        on_text: p.allValuesAOO[5] = self.text
+        on_text: app.SET = False
+
+
+<RowAOO7>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[6]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[6]
+        disabled: True
+        values: p.ParameterValues[p.allParameters[6]][0]
+        on_text: p.allValuesAOO[6] = self.text
+        on_text: app.SET = False
+        
     
-    CheckBox:
-        id:CheckBox 
-        text: 'CheckBox'
-        active: False
-        size_hint_x: 0.75
+
+<RowAOO8>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[7]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[7]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[7]][0]
+        on_text: p.allValuesAOO[7] = self.text
+        on_text: app.SET = False
+        
+
+<RowAOO9>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[8]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[8]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[8]][0]
+        on_text: p.allValuesAOO[8] = self.text
+        on_text: app.SET = False
+        
+    
+
+<RowAOO10>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[9]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[9]
+        disabled: False if app.currentMode == 'AOOR' else True
+        values: p.ParameterValues[p.allParameters[9]][0]
+        on_text: p.allValuesAOO[9] = self.text
+        on_text: app.SET = False
 
         
+        
+
+<RowAOO11>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[10]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[10]
+        disabled: False if app.currentMode == 'AOOR' else True
+        values: p.ParameterValues[p.allParameters[10]][0]
+        on_text: p.allValuesAOO[10] = self.text
+        on_text: app.SET = False
+        
+
+<RowAOO12>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[11]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[11]
+        disabled: False if app.currentMode == 'AOOR' else True
+        values: p.ParameterValues[p.allParameters[11]][0]
+        on_text: p.allValuesAOO[11] = self.text
+        on_text: app.SET = False
+        
+
+
+<RowAOO13>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[12]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[12]
+        disabled: False if app.currentMode == 'AOOR' else True
+        values: p.ParameterValues[p.allParameters[12]][0]
+        on_text: p.allValuesAOO[12] = self.text
+        on_text: app.SET = False
+        
+
+<RowVOO1>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.AOOParameters[0]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[0]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[0]][0]
+        on_text: p.allValuesVOO[0] = self.text
+        on_text: app.SET = False
+
+<RowVOO2>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[1]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[1]
+        disabled: False if app.currentMode == 'VOOR' else True
+        values: p.ParameterValues[p.allParameters[1]][0]
+        on_text: p.allValuesVOO[1] = self.text
+        on_text: app.SET = False
+        
+
+
+<RowVOO3>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[2]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[2]
+        disabled: True
+        values: p.ParameterValues[p.allParameters[2]][0]
+        on_text: p.allValuesVOO[2] = self.text
+        on_text: app.SET = False
+
+
+<RowVOO4>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[3]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[3]
+        disabled: True
+        values: p.ParameterValues[p.allParameters[3]][0]
+        on_text: p.allValuesVOO[3] = self.text
+        on_text: app.SET = False
+
+
+<RowVOO5>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[4]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[4]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[4]][0]
+        on_text: p.allValuesVOO[4] = self.text
+        on_text: app.SET = False
+        
+
+<RowVOO6>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[5]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[5]
+        disabled: True
+        values: p.ParameterValues[p.allParameters[5]][0]
+        on_text: p.allValuesVOO[5] = self.text
+        on_text: app.SET = False
+
+<RowVOO7>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[6]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[6]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[6]][0]
+        on_text: p.allValuesVOO[6] = self.text
+        on_text: app.SET = False
+        
+    
+<RowVOO8>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[7]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[7]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[7]][0]
+        on_text: p.allValuesVOO[7] = self.text
+        on_text: app.SET = False
+        
+
+<RowVOO9>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[8]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[8]
+        disabled: True
+        values: p.ParameterValues[p.allParameters[8]][0]
+        on_text: p.allValuesVOO[8] = self.text
+        on_text: app.SET = False
+        
+
+<RowVOO10>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[9]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[9]
+        disabled: False if app.currentMode == 'VOOR' else True
+        values: p.ParameterValues[p.allParameters[9]][0]
+        on_text: p.allValuesVOO[9] = self.text
+        on_text: app.SET = False
+
+<RowVOO11>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[10]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[10]
+        disabled: False if app.currentMode == 'VOOR' else True
+        values: p.ParameterValues[p.allParameters[10]][0]
+        on_text: p.allValuesVOO[10] = self.text
+        on_text: app.SET = False
+
+<RowVOO12>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[11]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[11]
+        disabled: False if app.currentMode == 'VOOR' else True
+        values: p.ParameterValues[p.allParameters[11]][0]
+        on_text: p.allValuesVOO[11] = self.text
+        on_text: app.SET = False
+        
+
+<RowVOO13>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[12]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[12]
+        disabled: False if app.currentMode == 'VOOR' else True
+        values: p.ParameterValues[p.allParameters[12]][0]
+        on_text: p.allValuesVOO[12] = self.text
+        on_text: app.SET = False
+        
+
+
+<RowAAI1>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.AOOParameters[0]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[0]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[0]][0]
+        on_text: p.allValuesAAI[0] = self.text
+        on_text: app.SET = False
+
+<RowAAI2>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[1]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[1]
+        disabled: False if app.currentMode == 'AAIR' else True
+        values: p.ParameterValues[p.allParameters[1]][0]
+        on_text: p.allValuesAAI[1] = self.text
+        on_text: app.SET = False
+
+
+<RowAAI3>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[2]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[2]
+        disabled: True
+        values: p.ParameterValues[p.allParameters[2]][0]
+        on_text: p.allValuesAAI[2] = self.text
+        on_text: app.SET = False
+        
+    
+
+
+
+<RowAAI4>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[3]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[3]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[3]][0]
+        on_text: p.allValuesAAI[3] = self.text
+        on_text: app.SET = False
+        
+    
+
+
+<RowAAI5>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[4]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[4]
+        disabled:True
+        values: p.ParameterValues[p.allParameters[4]][0]
+        on_text: p.allValuesAAI[4] = self.text
+        on_text: app.SET = False
+        
+    
+
+<RowAAI6>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[5]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[5]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[5]][0]
+        on_text: p.allValuesAAI[5] = self.text
+        on_text: app.SET = False
+        
+    
+
+<RowAAI7>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[6]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[6]
+        disabled: True
+        values: p.ParameterValues[p.allParameters[6]][0]
+        on_text: p.allValuesAAI[6] = self.text
+        on_text: app.SET = False
+        
+    
+
+<RowAAI8>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[7]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[7]
+        disabled: True
+        values: p.ParameterValues[p.allParameters[7]][0]
+        on_text: p.allValuesAAI[7] = self.text
+        on_text: app.SET = False
+        
+    
+
+<RowAAI9>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[8]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[8]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[8]][0]
+        on_text: p.allValuesAAI[8] = self.text
+        on_text: app.SET = False
+        
+    
+
+<RowAAI10>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[9]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[9]
+        disabled: False if app.currentMode == 'AAIR' else True
+        values: p.ParameterValues[p.allParameters[9]][0]
+        on_text: p.allValuesAAI[9] = self.text
+        on_text: app.SET = False
+        
+    
+
+<RowAAI11>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[10]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[10]
+        disabled: False if app.currentMode == 'AAIR' else True
+        values: p.ParameterValues[p.allParameters[10]][0]
+        on_text: p.allValuesAAI[10] = self.text
+        on_text: app.SET = False
+        
+    
+
+<RowAAI12>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[11]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[11]
+        disabled: False if app.currentMode == 'AAIR' else True
+        values: p.ParameterValues[p.allParameters[11]][0]
+        on_text: p.allValuesAAI[11] = self.text
+        on_text: app.SET = False
+        
+    
+
+
+<RowAAI13>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[12]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[12]
+        disabled: False if app.currentMode == 'AAIR' else True
+        values: p.ParameterValues[p.allParameters[12]][0]
+        on_text: p.allValuesAAI[12] = self.text
+        on_text: app.SET = False
+        
+    
+
+
+<RowVVI1>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.AOOParameters[0]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[0]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[0]][0]
+        on_text: p.allValuesVVI[0] = self.text
+        on_text: app.SET = False
+        
+
+<RowVVI2>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[1]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[1]
+        disabled: False if app.currentMode == 'VVIR' else True
+        values: p.ParameterValues[p.allParameters[1]][0]
+        on_text: p.allValuesVVI[1] = self.text
+        on_text: app.SET = False        
+    
+
+
+<RowVVI3>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[2]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[2]
+        disabled: True
+        values: p.ParameterValues[p.allParameters[2]][0]
+        on_text: p.allValuesVVI[2] = self.text
+        on_text: app.SET = False        
+    
+
+
+
+<RowVVI4>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[3]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[3]
+        disabled: True
+        values: p.ParameterValues[p.allParameters[3]][0]
+        on_text: p.allValuesVVI[3] = self.text
+        on_text: app.SET = False
+        
+    
+
+
+<RowVVI5>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[4]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[4]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[4]][0]
+        on_text: p.allValuesVVI[4] = self.text
+        on_text: app.SET = False
+        
+    
+
+<RowVVI6>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[5]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[5]
+        disabled: True
+        values: p.ParameterValues[p.allParameters[5]][0]
+        on_text: p.allValuesVVI[5] = self.text
+        on_text: app.SET = False
+        
+    
+
+<RowVVI7>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[6]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[6]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[6]][0]
+        on_text: p.allValuesVVI[6] = self.text
+        on_text: app.SET = False
+        
+    
+
+<RowVVI8>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[7]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[7]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[7]][0]
+        on_text: p.allValuesVVI[7] = self.text
+        on_text: app.SET = False
+        
+    
+
+<RowVVI9>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[8]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[8]
+        disabled: True
+        values: p.ParameterValues[p.allParameters[8]][0]
+        on_text: p.allValuesVVI[8] = self.text
+        on_text: app.SET = False
+        
+    
+
+<RowVVI10>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[9]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[9]
+        disabled: False if app.currentMode == 'VVIR' else True
+        values: p.ParameterValues[p.allParameters[9]][0]
+        on_text: p.allValuesVVI[9] = self.text
+        on_text: app.SET = False
+        
+    
+
+<RowVVI11>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[10]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[10]
+        disabled: False if app.currentMode == 'VVIR' else True
+        values: p.ParameterValues[p.allParameters[10]][0]
+        on_text: p.allValuesVVI[10] = self.text
+        on_text: app.SET = False
+        
+    
+
+<RowVVI12>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[11]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[11]
+        disabled: False if app.currentMode == 'VVIR' else True
+        values: p.ParameterValues[p.allParameters[11]][0]
+        on_text: p.allValuesVVI[11] = self.text
+        on_text: app.SET = False
+        
+    
+
+
+<RowVVI13>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[12]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[12]
+        disabled: False if app.currentMode == 'VVIR' else True
+        values: p.ParameterValues[p.allParameters[12]][0]
+        on_text: p.allValuesVVI[12] = self.text
+        on_text: app.SET = False
+        
+    
+
+
+<RowDOO1>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.AOOParameters[0]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[0]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[0]][0]
+        on_text: p.allValuesDOO[0] = self.text
+        on_text: app.SET = False
+        
+
+
+<RowDOO2>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[1]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[1]
+        disabled: False if app.currentMode == 'DOOR' else True
+        values: p.ParameterValues[p.allParameters[1]][0]
+        on_text: p.allValuesDOO[1] = self.text
+        on_text: app.SET = False
+        
+    
+
+
+<RowDOO3>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[2]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[2]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[2]][0]
+        on_text: p.allValuesDOO[2] = self.text
+        on_text: app.SET = False
+        
+    
+
+
+
+<RowDOO4>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[3]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[3]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[3]][0]
+        on_text: p.allValuesDOO[3] = self.text
+        on_text: app.SET = False
+    
+
+
+<RowDOO5>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[4]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[4]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[4]][0]
+        on_text: p.allValuesDOO[4] = self.text
+        on_text: app.SET = False
+        
+    
+
+<RowDOO6>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[5]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[5]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[5]][0]
+        on_text: p.allValuesDOO[5] = self.text
+        on_text: app.SET = False
+        
+    
+
+<RowDOO7>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[6]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[6]
+        disabled: False
+        values: p.ParameterValues[p.allParameters[6]][0]
+        on_text: p.allValuesDOO[6] = self.text
+        on_text: app.SET = False
+        
+    
+
+<RowDOO8>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[7]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[7]
+        disabled: True
+        values: p.ParameterValues[p.allParameters[7]][0]
+        on_text: p.allValuesDOO[7] = self.text
+        on_text: app.SET = False
+        
+    
+
+<RowDOO9>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[8]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[8]
+        disabled: True
+        values: p.ParameterValues[p.allParameters[8]][0]
+        on_text: p.allValuesDOO[8] = self.text
+        on_text: app.SET = False
+        
+    
+
+<RowDOO10>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[9]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[9]
+        disabled: False if app.currentMode == 'DOOR' else True
+        values: p.ParameterValues[p.allParameters[9]][0]
+        on_text: p.allValuesDOO[9] = self.text
+        on_text: app.SET = False
+    
+
+<RowDOO11>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[10]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[10]
+        disabled: False if app.currentMode == 'DOOR' else True
+        values: p.ParameterValues[p.allParameters[10]][0]
+        on_text: p.allValuesDOO[10] = self.text
+        on_text: app.SET = False
+        
+    
+
+<RowDOO12>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[11]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[11]
+        disabled: False if app.currentMode == 'DOOR' else True
+        values: p.ParameterValues[p.allParameters[11]][0]
+        on_text: p.allValuesDOO[11] = self.text
+        on_text: app.SET = False
+        
+    
+
+
+<RowDOO13>:
+    spacing: 50
+    size_hint_x: 1
+
+
+    Label:
+        text: p.allParameters[12]
+        size_hint_x: 1
+        font_size: 15
+
+    Spinner:       
+        id: value
+        text: d.activeValues[12]
+        disabled: False if app.currentMode == 'DOOR' else True
+        values: p.ParameterValues[p.allParameters[12]][0]
+        on_text: p.allValuesDOO[12] = self.text
+        on_text: app.SET = False
+        
+    
+
+
 <Connection>:
     text: 'Device Connection'
     orientation: 'vertical'
@@ -183,7 +1433,7 @@
     
     Label:
         font_size: 20
-        text: '   Connected Device: \n\n <Device Identifier here>'
+        text: '   Connected User: \n\n '
         bold: True
         orientation: 'horizontal'
         padding: 0,0
@@ -206,7 +1456,6 @@
         background_color: (0,0.7,1,1) if root.showPacingModes() else (0.0, 1.0, 0.0, 1.0)
         halign: 'center'
         font_size: 18
-        # size_hint_y: 0.15
 
 	Button:
 		text: 'Logout'
@@ -214,24 +1463,35 @@
 		on_press: root.Logout()
 
 <statusBar>:
-    padding: 8
+    id: status
 
     Button:
-		text: 'CONNECTION SCREEN'
+		text: ' CONNECTION SCREEN '
 		background_color: (0.75,0,0,1)
 		on_press: root.returnConnection()
-
-	Label:
-		text:' Connected Device:\n<Device Identifier here>'
+    
+    Label:
+		text: 'Current Mode:\n' + app.currentMode
+        color: (1,0,0.1,0.8)
 		
 	Label:
-		text: 'Status: Connected'
+		text: 'Status:\n CONNECTED'
 		color: (0,1,0.5,1)
+    
+    Label:
+        id: set
+		text: 'Mode & Parameters: \nNOT SET' if not app.SET else 'Mode & Parameters: \nSET'
+        active: False
+		color: (0.94,0.78,0.04,1)
 	
 	Button:
+        id: TB
 		text: 'SET ALL'
 		background_color: (0,0.75,0.25,1)
-		on_press: root.returnConnection()
+		on_press: root.setAll()
+        on_press: app.SET = True
+        
+        
     
 <title>:
     Label:
@@ -245,15 +1505,3 @@
         text: 'PARAMETER VALUES'
         bold: True
         font_size: 20
-
-    Label:
-        orientation:'horizontal'
-        text: 'ENABLE EDIT'
-        bold: True
-        font_size: 20
-
-
-        
-    
-    
-    
