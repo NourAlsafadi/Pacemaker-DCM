@@ -1,7 +1,7 @@
 from openpyxl import load_workbook
 import TextFileManipulation
 import Parameters 
-
+import serial
 
 book = load_workbook(filename = 'database.xlsx')
 
@@ -53,6 +53,7 @@ def setParameters():
             PARAMETERS[str(chr(ord('C') + i)) + str(getUserID(activeUser)) ] = Parameters.allValuesDOO[i]
     
     book.save('database.xlsx')
+    signalSerial(activeUser)
     return
 
 def getParameters(AU):
@@ -66,5 +67,36 @@ def getParameters(AU):
     return data
 
 
-def signalSerial():
+
+def signalSerial(AU):
+    pacemaker=serial.Serial()
+    pacemaker.port='COM5'
+    pacemaker.baudrate=115200
+
+    data=getParameters(AU)
+    Tx=bytearray()
+    for parameter in data:
+        if parameter.value in Parameters.tp10:
+            Tx.append(2)
+            Tx.append(0)
+        elif '.' not in parameter.value:
+            byte_data=int(parameter.value)
+            temp=byte_data.to_bytes(2,'little',signed=False)
+            Tx.append(temp[0])
+            Tx.append(temp[1])
+        else:
+            byte_data=int(float(parameter.value)*1000)
+            temp=byte_data.to_bytes(2,'little',signed=False)
+            Tx.append(temp[0])
+            Tx.append(temp[1])
+        
+
+    pacemaker.open()
+    pacemaker.write(Tx)
+
+    pacemaker.close()
+    print('Sent\n')
+    print(Tx) 
+    
+    
     return

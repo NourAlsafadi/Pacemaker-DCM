@@ -19,11 +19,11 @@ tp3 = tuple( [str(x) for x in range(95,180,5)] )
 
 tp4 = tuple( [str(x) for x in range(50,180,5)] )
 tp5 = tuple(["0.05"]) + tuple( [str(x/10) for x in range(1,20,1)] )
-tp6 = tuple( ["off"] + [str(x/10) for x in range(5,33,1)] + [str(x/10) for x in range(35,75,5)] )
+tp6 = tuple( [str(x/10) for x in range(5,33,1)] + [str(x/10) for x in range(35,75,5)] )
 
 tp7 = tuple( ["0.25","0.5","0.7"] + [str(x/10) for x in range(1,11,1)])
 tp8 = tuple( [str(x) for x in range(150,510,10)] )
-tp9 = tuple(["off"] + [str(x) for x in range(3,24,3)] + ["25"])
+tp9 = tuple( [str(x) for x in range(3,24,3)] + ["25"])
 
 tp10 = ("V-Low","Low","Med-Low","Med","Med-High","High","V-High")
 tp11 = tuple([str(x) for x in range(10,60,10)])
@@ -41,7 +41,7 @@ ParameterValues =	{
 "Atrial Sensitivity": [tp7,"0.75"],
 "ARP": [tp8, "250"],
 "PVARP": [tp8,"250"],
-"Hysteresis": [tuple(["off"]) + tp1 + tp2 + tp3, "off"],
+"Hysteresis": [ tp1 + tp2 + tp3],
 "Rate Smoothing": [tp9,"off"],
 "Ventricular Sensitivity": [tp7,"2.5"],
 "VRP": [tp8,"320"],
