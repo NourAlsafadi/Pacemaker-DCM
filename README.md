@@ -1,8 +1,6 @@
 # Pacemaker-DCM
 A graphical interface for a device-controller monitor (DCM) to be used for a pacemaker. 
 
-![Login Screen](https://imgur.com/9wo5EqZ)
-
-![Connection Screen](https://imgur.com/XQgAJRX)
-
-![Parameter Screen](https://imgur.com/VK2pa8t)
+![Login Screen](https://i.postimg.cc/sg3Wfdxr/Login.png)
+![Connection Screen](https://i.postimg.cc/qMsndMkw/Connection.png)
+![Parameter Screen](https://i.postimg.cc/q7RCns2D/Parameters.png)
